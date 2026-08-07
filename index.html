@@ -1,777 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Paperdrop - Software Consultancy | Digital Transformation & Automation</title>
-  <meta name="description" content="Paperdrop is a modern software consultancy specializing in digital transformation, process automation, and AI-driven solutions for businesses.">
-  <meta name="keywords" content="Software Consultancy, Digital Transformation, Process Automation, AI Solutions, ContractDrop, Paperless Solutions, LLMs, Copilot, AI Integration">
-  <meta name="author" content="Paperdrop">
-  <link rel="canonical" href="https://www.paperdrop.io/">
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-color: #4A90E2;
-      --secondary-color: #667eea;
-      --accent-color: #764ba2;
-      --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      --background-light: #f8fafc;
-      --background-dark: #0f172a;
-      --text-light: #334155;
-      --text-dark: #e2e8f0;
-      --card-light: #ffffff;
-      --card-dark: #1e293b;
-      --shadow-light: 0 10px 25px rgba(0, 0, 0, 0.1);
-      --shadow-dark: 0 10px 25px rgba(0, 0, 0, 0.3);
-      --border-radius: 16px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Ubuntu', sans-serif;
-      background: var(--background-light);
-      color: var(--text-light);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    body.dark-mode {
-      background: var(--background-dark);
-      color: var(--text-dark);
-    }
-
-    .hero-section {
-      background: var(--gradient-primary);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-      animation: float 20s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(1deg); }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      padding: 2rem;
-    }
-
-    .logo-container {
-      margin-bottom: 2rem;
-      animation: logoGlow 3s ease-in-out infinite;
-    }
-
-    @keyframes logoGlow {
-      0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3)); }
-      50% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5)); }
-    }
-
-    .hero-logo {
-      max-height: 80px;
-      border-radius: 12px;
-      transition: transform 0.3s ease;
-    }
-
-    .hero-logo:hover {
-      transform: scale(1.05) rotate(2deg);
-    }
-
-    .hero-title {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: 700;
-      color: white;
-      margin: 1rem 0;
-      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      animation: slideInUp 1s ease-out;
-    }
-
-    .hero-subtitle {
-      font-size: clamp(1.1rem, 3vw, 1.5rem);
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 2rem;
-      animation: slideInUp 1s ease-out 0.2s both;
-    }
-
-    .cta-button {
-      display: inline-block;
-      padding: 1rem 2rem;
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      text-decoration: none;
-      border-radius: var(--border-radius);
-      font-weight: 600;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: all 0.3s ease;
-      animation: slideInUp 1s ease-out 0.4s both;
-    }
-
-    .cta-button:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    }
-
-    .toggle-mode {
-      position: fixed;
-      top: 2rem;
-      right: 2rem;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 0.75rem;
-      font-size: 1.5em;
-      cursor: pointer;
-      color: white;
-      border-radius: 50%;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-      z-index: 1000;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .toggle-mode:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: scale(1.1) rotate(180deg);
-    }
-
-    @keyframes slideInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    section {
-      padding: 5rem 0;
-      animation: fadeInOnScroll 0.8s ease-out;
-    }
-
-    .section-title {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 3rem;
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      position: relative;
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 4px;
-      background: var(--gradient-primary);
-      border-radius: 2px;
-    }
-
-    .intro, .about, .ai-section {
-      text-align: center;
-    }
-
-    .intro p, .about p, .ai-section p {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      line-height: 1.8;
-      max-width: 800px;
-      margin: 0 auto 2rem auto;
-      color: var(--text-light);
-    }
-
-    .dark-mode .intro p,
-    .dark-mode .about p,
-    .dark-mode .ai-section p {
-      color: var(--text-dark);
-    }
-
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-
-    .service {
-      background: var(--card-light);
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow-light);
-      padding: 2.5rem;
-      text-align: center;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .service::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--gradient-primary);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .service:hover::before {
-      transform: scaleX(1);
-    }
-
-    .service:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    }
-
-    .dark-mode .service {
-      background: var(--card-dark);
-      box-shadow: var(--shadow-dark);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .service-icon {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .service h3 {
-      margin: 1rem 0;
-      color: var(--primary-color);
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-
-    .service p {
-      color: var(--text-light);
-      line-height: 1.6;
-    }
-
-    .dark-mode .service p {
-      color: var(--text-dark);
-    }
-
-    .ai-section {
-      background: var(--card-light);
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow-light);
-      padding: 4rem 2rem;
-      margin: 4rem auto;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .ai-section::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -50%;
-      width: 200%;
-      height: 200%;
-      background: var(--gradient-secondary);
-      opacity: 0.05;
-      animation: rotate 20s linear infinite;
-    }
-
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .dark-mode .ai-section {
-      background: var(--card-dark);
-      box-shadow: var(--shadow-dark);
-    }
-
-    .ai-section .container {
-      position: relative;
-      z-index: 2;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .feature-item {
-      padding: 1.5rem;
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 12px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      transition: all 0.3s ease;
-    }
-
-    .dark-mode .feature-item {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .feature-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
-
-    .feature-item::before {
-      content: '✨';
-      display: block;
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    footer {
-      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-      color: white;
-      text-align: center;
-      padding: 3rem 0;
-      margin-top: 0;
-      position: relative;
-    }
-
-    footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: var(--gradient-primary);
-    }
-
-    .footer-content {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    footer p {
-      margin: 1rem 0;
-      font-size: 1rem;
-      line-height: 1.6;
-      opacity: 0.9;
-    }
-
-    .copy-icon {
-      cursor: pointer;
-      margin-left: 8px;
-      font-size: 1.1em;
-      color: var(--primary-color);
-      transition: all 0.3s ease;
-    }
-
-    .copy-icon:hover {
-      transform: scale(1.2);
-      filter: brightness(1.2);
-    }
-
-    .toast {
-      visibility: hidden;
-      min-width: 250px;
-      margin-left: -125px;
-      background: var(--gradient-primary);
-      color: white;
-      text-align: center;
-      border-radius: var(--border-radius);
-      padding: 1rem 1.5rem;
-      position: fixed;
-      z-index: 1001;
-      left: 50%;
-      bottom: 2rem;
-      font-size: 1rem;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
-    }
-
-    .toast.show {
-      visibility: visible;
-      animation: slideInToast 0.5s ease-out, slideOutToast 0.5s ease-out 2.5s;
-    }
-
-    @keyframes slideInToast {
-      from {
-        bottom: 0;
-        opacity: 0;
-        transform: translateX(-50%) translateY(100%);
-      }
-      to {
-        bottom: 2rem;
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-      }
-    }
-
-    @keyframes slideOutToast {
-      from {
-        bottom: 2rem;
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-      }
-      to {
-        bottom: 0;
-        opacity: 0;
-        transform: translateX(-50%) translateY(100%);
-      }
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      color: white;
-      animation: bounce 2s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-      40% { transform: translateX(-50%) translateY(-10px); }
-      60% { transform: translateX(-50%) translateY(-5px); }
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .hero-section {
-        min-height: 100vh;
-        padding: 2rem 1rem;
-      }
-
-      .hero-content {
-        padding: 1rem;
-      }
-
-      .toggle-mode {
-        top: 1rem;
-        right: 1rem;
-        width: 50px;
-        height: 50px;
-        font-size: 1.2em;
-      }
-
-      section {
-        padding: 3rem 0;
-      }
-
-      .container {
-        padding: 0 1rem;
-      }
-
-      .services {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      .service {
-        padding: 2rem;
-      }
-
-      .ai-section {
-        padding: 3rem 1rem;
-        margin: 2rem 1rem;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-content {
-        padding: 0 1rem;
-      }
-
-      footer p {
-        font-size: 0.9rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-title {
-        font-size: 2rem;
-      }
-
-      .hero-subtitle {
-        font-size: 1rem;
-      }
-
-      .cta-button {
-        padding: 0.75rem 1.5rem;
-        font-size: 0.9rem;
-      }
-
-      .section-title {
-        font-size: 1.8rem;
-      }
-
-      .service {
-        padding: 1.5rem;
-      }
-
-      .toast {
-        min-width: 200px;
-        margin-left: -100px;
-        padding: 0.75rem 1rem;
-        font-size: 0.9rem;
-      }
-    }
-
-    /* Tablet specific styles */
-    @media (min-width: 768px) and (max-width: 1024px) {
-      .services {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    /* Animation for elements coming into view */
-    .fade-in-on-scroll {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease-out;
-    }
-
-    .fade-in-on-scroll.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Smooth scroll behavior */
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* Focus styles for accessibility */
-    .toggle-mode:focus,
-    .cta-button:focus,
-    .copy-icon:focus {
-      outline: 2px solid var(--primary-color);
-      outline-offset: 2px;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paperdrop — process automation &amp; AI consultancy | Toronto &amp; Pune</title>
+<meta name="description" content="Paperdrop is a software consultancy for small and midsize businesses running on paper, forms and manual re-keying. We map the process, automate what should not need a person, and leave an audit trail on every step." />
+<meta name="author" content="Paperdrop" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://paperdrop.io/" />
+<link rel="icon" type="image/png" href="assets/mark.png" />
+<link rel="apple-touch-icon" href="assets/mark.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Paperdrop" />
+<meta property="og:url" content="https://paperdrop.io/" />
+<meta property="og:title" content="Paperdrop — process automation &amp; AI consultancy" />
+<meta property="og:description" content="Paper-based process in, audited automation out. Digital transformation, process automation and AI for small and midsize businesses. Toronto and Pune." />
+<meta property="og:image" content="https://paperdrop.io/assets/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_CA" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Paperdrop — process automation &amp; AI consultancy" />
+<meta name="twitter:description" content="Paper-based process in, audited automation out. Digital transformation, process automation and AI for small and midsize businesses." />
+<meta name="twitter:image" content="https://paperdrop.io/assets/og.png" />
+<meta name="theme-color" content="#f2f2f3" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://paperdrop.io/#organization",
+  "name": "Paperdrop",
+  "url": "https://paperdrop.io/",
+  "logo": "https://paperdrop.io/assets/mark.png",
+  "image": "https://paperdrop.io/assets/og.png",
+  "description": "Software consultancy specialising in digital transformation, process automation and auditable AI for small and midsize businesses.",
+  "email": "hello@paperdrop.io",
+  "areaServed": ["CA", "US", "IN"],
+  "address": [
+    { "@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" },
+    { "@type": "PostalAddress", "addressLocality": "Pune", "addressRegion": "MH", "addressCountry": "IN" }
+  ],
+  "contactPoint": [
+    { "@type": "ContactPoint", "contactType": "sales", "telephone": "+1-437-449-6106", "email": "hello@paperdrop.io", "areaServed": "CA" },
+    { "@type": "ContactPoint", "contactType": "sales", "telephone": "+91-7276197537", "email": "hello@paperdrop.io", "areaServed": "IN" }
+  ],
+  "knowsAbout": ["Digital transformation", "Business process automation", "Document automation", "Large language models", "AI integration", "Workflow software"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Services",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital transformation", "description": "Paper forms, shared inboxes and spreadsheets replaced with systems of record." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Process automation", "description": "Intake, routing, approval chasing and re-keying handed to software, with exceptions escalated to a named person." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Consulting and training", "description": "Technical due diligence, operator training, runbooks and handover." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI and LLM integration", "description": "Bounded, auditable model steps integrated with Copilot, ChatGPT and comparable platforms." } }
+    ]
+  }
+}
+</script>
+<link rel="stylesheet" href="assets/industry.css">
+<style>
+html { scroll-behavior: smooth; }
+body { margin: 0; text-wrap: pretty; background: var(--color-bg); color: var(--color-text); }
+a { color: var(--color-accent-700); text-decoration: none; }
+a:hover { color: var(--color-accent); }
+:root {
+  --color-accent: #2a00e6;
+  --color-accent-100: #e8e3fd;
+  --color-accent-200: #cfc4fb;
+  --color-accent-300: #a891f6;
+  --color-accent-400: #6b47ef;
+  --color-accent-500: #2a00e6;
+  --color-accent-600: #2400c4;
+  --color-accent-700: #1e00a3;
+  --color-accent-800: #170080;
+  --color-accent-900: #0e0052;
+  --color-accent-2: #2ed3c0;
+  --color-accent-2-100: #d9f7f3;
+  --color-accent-2-200: #b0efe6;
+  --color-accent-2-300: #7ce3d5;
+  --color-accent-2-400: #4ed9c8;
+  --color-accent-2-500: #2ed3c0;
+  --color-accent-2-600: #1fae9e;
+  --color-accent-2-700: #16887b;
+  --color-accent-2-800: #0f6259;
+  --color-accent-2-900: #093c36;
+}
+
+/* The nav is a single flex row in the design system; below the desktop
+   breakpoint the six items no longer fit one line, so let them wrap. */
+@media (max-width: 880px) {
+  .nav { flex-wrap: wrap; gap: 12px 18px; padding-block: 14px; }
+  .nav-brand { flex-basis: 100%; margin-right: 0; }
+}
+/* The spec sheet is a fixed four-column table; give it its own scroller
+   rather than letting it force the page sideways on a phone. */
+.table-scroll { overflow-x: auto; }
+.table-scroll > .table { min-width: 620px; }
+</style>
 </head>
-
 <body>
 
-  <button class="toggle-mode" onclick="toggleDarkMode()">🌓</button>
+<nav class="nav" style="position:sticky;top:0;z-index:20;background:var(--color-bg);border-bottom:1px solid var(--color-divider);padding-inline:max(24px, calc((100% - 1160px) / 2 + 24px))">
+  <span class="nav-brand" style="display:flex;align-items:center;gap:10px;letter-spacing:0.05em;text-transform:uppercase;font-size:26px">
+    <img src="assets/mark.png" alt="" style="height:34px;width:34px;display:block;object-fit:contain" />
+    <span><span style="color:var(--color-accent)">Paper</span><span style="color:var(--color-accent-2-700)">drop</span></span>
+  </span>
+  <a href="#services">Services</a>
+  <a href="#ai">AI capability</a>
+  <a href="#method">Method</a>
+  <a href="#about">About</a>
+  <a href="#careers">Careers</a>
+  <a class="btn btn-primary" href="mailto:hello@paperdrop.io?subject=Enquiry%20from%20paperdrop.io" style="color:var(--color-bg)">Email us</a>
+</nav>
 
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="hero-content">
-      <div class="logo-container">
-        <img src="Logo.avif" alt="Paperdrop Logo" class="hero-logo">
-      </div>
-      <h1 class="hero-title">Paperdrop</h1>
-      <p class="hero-subtitle">Transforming businesses through digital innovation and AI-powered solutions</p>
-      <a href="#about" class="cta-button">Discover Our Story</a>
-    </div>
-    <div class="scroll-indicator">
-      <div style="font-size: 1.5rem;">↓</div>
-      <div style="font-size: 0.9rem; margin-top: 0.5rem;">Scroll to explore</div>
-    </div>
-  </section>
+<div style="max-width:1160px;margin:0 auto;padding:0 clamp(20px,5vw,64px)">
 
-  <!-- About Section -->
-  <section id="about" class="intro">
-    <div class="container">
-      <h2 class="section-title">About Us</h2>
-      <p>
-        Paperdrop is a modern software consultancy focused on helping organizations streamline processes, adopt digital solutions,
-        and reduce their reliance on paper. We help you embrace efficiency, sustainability, and superior user experiences.
-      </p>
-    </div>
-  </section>
-
-  <!-- Our Story Section -->
-  <section class="about">
-    <div class="container">
-      <h2 class="section-title">Our Story</h2>
-      <p>
-        We are a group of passionate technical professionals with a combined industry experience of 50 years. We created this software consultancy firm dedicated to helping small to midsize businesses transform their paper-based processes into efficient, automated solutions.
-      </p>
-      <p>
-        Our team is composed of experienced product managers, trainers, designers, architects and developers that are experts in building & leveraging technology. We understand that many businesses still rely on paper-based processes, which can be time-consuming, error-prone, and costly.
-      </p>
-      <p>
-        We're committed to working closely with our clients to develop custom software solutions that automate their workflows, reduce errors, and save time and money. Our focus is on delivering affordable solutions that provide a rapid return on investment.
-      </p>
-    </div>
-  </section>
-
-  <!-- Services Section -->
-  <section>
-    <div class="container">
-      <h2 class="section-title">Our Services</h2>
-      <div class="services">
-        <div class="service fade-in-on-scroll">
-          <div class="service-icon">🚀</div>
-          <h3>Digital Transformation</h3>
-          <p>
-            Guiding organizations through the adoption of digital tools and workflows to improve productivity and reduce waste.
-          </p>
-        </div>
-        <div class="service fade-in-on-scroll">
-          <div class="service-icon">⚡</div>
-          <h3>Process Automation</h3>
-          <p>
-            Implementing automation solutions that eliminate repetitive tasks, freeing up time for innovation and growth.
-          </p>
-        </div>
-        <div class="service fade-in-on-scroll">
-          <div class="service-icon">🎯</div>
-          <h3>Consulting & Training</h3>
-          <p>
-            Providing expert advice and hands-on training to ensure your team can fully leverage new technologies and practices.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="ai-section fade-in-on-scroll">
-    <h2>AI Ready Solutions</h2>
-    <p>
-      Our team at Paperdrop is dedicated to helping businesses leverage the power of AI and Large Language Models (LLMs).
-      <br/><br/>
-      Whether you're looking to integrate intelligent copilots into your existing software, build AI assistants for your team, or develop custom LLMs specifically trained on your company’s data and processes — we can help.
-      <br/><br/>
-      We design and build AI-ready systems that:
-      <ul class="list" style="text-align: left; display: inline-block; margin-top: 15px; line-height: 20px;">
-        <li>Integrate seamlessly with industry-leading AI platforms like Copilot, ChatGPT, and more</li>
-        <li>Create domain-specific LLMs tailored for your company and industry</li>
-        <li>Improve team productivity with context-aware AI assistants</li>
-        <li>Enhance decision making with AI-driven insights</li>
-        <li>Future-proof your software and workflows for the evolving AI landscape</li>
-      </ul>
+  <section style="padding:96px 0 72px">
+    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">Software consultancy · Toronto &amp; Pune</span>
+    <hr style="height:1px;border:0;margin:0 0 28px;background:var(--color-divider)" />
+    <h1 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(44px,6.4vw,88px);line-height:1.04;letter-spacing:0.01em;text-transform:uppercase;margin:0 0 0 -0.052em">
+      <span style="display:block">Paper-based process in.</span>
+      <span style="display:block">Audited automation out.</span>
+    </h1>
+    <p style="font-size:17px;line-height:28px;max-width:62ch;margin:32px 0 0;color:color-mix(in srgb, var(--color-text) 82%, transparent)">
+      We are a consultancy for small and midsize organisations that still run on forms, email attachments and manual re-keying. We map the process, automate the parts that should not need a person, and leave an audit trail on every step a machine takes.
     </p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:32px">
+      <a class="btn btn-primary" href="mailto:hello@paperdrop.io?subject=Process%20review%20enquiry" style="color:var(--color-bg)">hello@paperdrop.io</a>
+      <a class="btn btn-secondary" href="#method">How we work</a>
+    </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <p>&copy; 2025 Paperdrop. All rights reserved.</p>
-      <p>Phone (Toronto): +1 437 449 6106 <span class="copy-icon" onclick="copyToClipboard('+14374496106')">📞</span> |
-        Phone (Pune): +91 7276197537 <span class="copy-icon" onclick="copyToClipboard('+917276197537')">📞</span>
-      </p>
-      <p>Email: <a href="mailto:hello@paperdrop.io" style="color: #4A90E2;">hello@paperdrop.io</a>
-        <span class="copy-icon" onclick="copyToClipboard('hello@paperdrop.io')">✉️</span>
-      </p>
-      <p>Locations: Toronto | Pune</p>
-      <p style="font-size: 0.9em; opacity: 0.7;">This website was built by an in-house LLM (Benefactor-v1.10).</p>
+  <section aria-label="Practice data" style="padding:0 0 80px">
+    <div>
+
+      <header style="display:flex;flex-wrap:wrap;align-items:stretch;border-bottom:1px solid var(--color-divider)">
+        <span style="flex:1;min-width:16ch;padding:12px 0;font-size:13px;line-height:24px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600">Paperdrop — practice data</span>
+        <span style="padding:12px 24px;font-size:13px;line-height:24px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;white-space:nowrap;color:color-mix(in srgb, var(--color-text) 70%, transparent)">Sheet 01</span>
+      </header>
+      <div class="table-scroll">
+      <table class="table" style="table-layout:fixed">
+        <colgroup><col style="width:72px" /><col style="width:30%" /><col style="width:24%" /><col /></colgroup>
+        <thead>
+          <tr>
+            <th scope="col" style="padding:12px 24px 12px 0">No.</th>
+            <th scope="col" style="padding:12px 24px 12px 0">Property</th>
+            <th scope="col" style="padding:12px 24px 12px 0">Value</th>
+            <th scope="col" style="padding:12px 24px 12px 0">Remark</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:12px 24px 12px 0;font-size:13px;font-weight:600;letter-spacing:0.08em;color:var(--color-accent-700)">01</td>
+            <td style="padding:12px 24px 12px 0;font-size:15px;line-height:24px">Combined industry experience</td>
+            <td style="padding:12px 24px 12px 0;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:22px;line-height:24px;white-space:nowrap">50 years</td>
+            <td style="padding:12px 24px 12px 0;font-size:15px;line-height:24px;color:color-mix(in srgb, var(--color-text) 78%, transparent)">Across product, design, architecture and delivery</td>
+          </tr>
+          <tr>
+            <td style="padding:12px 24px 12px 0;font-size:13px;font-weight:600;letter-spacing:0.08em;color:var(--color-accent-700)">02</td>
+            <td style="padding:12px 24px 12px 0;font-size:15px;line-height:24px">Who we build for</td>
+            <td style="padding:12px 24px 12px 0;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:22px;line-height:24px;white-space:nowrap">SMB &amp; mid-market</td>
+            <td style="padding:12px 24px 12px 0;font-size:15px;line-height:24px;color:color-mix(in srgb, var(--color-text) 78%, transparent)">Owner-led firms, ops teams, internal IT</td>
+          </tr>
+          <tr>
+            <td style="padding:12px 24px 12px 0;font-size:13px;font-weight:600;letter-spacing:0.08em;color:var(--color-accent-700)">03</td>
+            <td style="padding:12px 24px 12px 0;font-size:15px;line-height:24px">Engagement shape</td>
+            <td style="padding:12px 24px 12px 0;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:22px;line-height:24px;white-space:nowrap">Review, then build</td>
+            <td style="padding:12px 24px 12px 0;font-size:15px;line-height:24px;color:color-mix(in srgb, var(--color-text) 78%, transparent)">Scope agreed in writing before any build begins</td>
+          </tr>
+          <tr>
+            <td style="padding:12px 24px 12px 0;font-size:13px;font-weight:600;letter-spacing:0.08em;color:var(--color-accent-700);border-bottom:0">04</td>
+            <td style="padding:12px 24px 12px 0;font-size:15px;line-height:24px;border-bottom:0">Delivery locations</td>
+            <td style="padding:12px 24px 12px 0;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:22px;line-height:24px;white-space:nowrap;border-bottom:0">Toronto · Pune</td>
+            <td style="padding:12px 24px 12px 0;font-size:15px;line-height:24px;color:color-mix(in srgb, var(--color-text) 78%, transparent);border-bottom:0">Overlapping hours across North America and IST</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="margin:0;padding:12px 0 0;font-size:13px;line-height:24px;color:color-mix(in srgb, var(--color-text) 70%, transparent)">Figures describe the practice, not a client outcome. Outcome numbers are quoted per engagement, after the review.</p>
     </div>
+  </section>
+
+  <section id="services" style="padding:0 0 80px">
+    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">02 · Services</span>
+    <hr style="height:1px;border:0;margin:0 0 32px;background:var(--color-divider)" />
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(24px,3vw,48px)">
+      <div style="border-top:2px solid var(--color-divider);padding-top:20px">
+
+        <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:22px;line-height:24px;letter-spacing:0.02em;text-transform:uppercase;margin:0">Digital transformation</h2>
+        <p style="font-size:15px;line-height:24px;margin:16px 0 0;color:color-mix(in srgb, var(--color-text) 80%, transparent)">Paper forms, shared inboxes and spreadsheets replaced with systems of record. We inventory the documents, agree what each one is actually for, and retire the ones nobody reads.</p>
+        <ul style="margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;line-height:20px;color:color-mix(in srgb, var(--color-text) 72%, transparent)">
+          <li>Process and document audit</li>
+          <li>Systems selection and integration</li>
+          <li>Migration off paper and PDFs</li>
+        </ul>
+      </div>
+      <div style="border-top:2px solid var(--color-divider);padding-top:20px">
+
+        <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:22px;line-height:24px;letter-spacing:0.02em;text-transform:uppercase;margin:0">Process automation</h2>
+        <p style="font-size:15px;line-height:24px;margin:16px 0 0;color:color-mix(in srgb, var(--color-text) 80%, transparent)">The repetitive middle of a workflow — intake, routing, approval chasing, re-keying — handed to software, with exceptions escalated to a named person rather than swallowed.</p>
+        <ul style="margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;line-height:20px;color:color-mix(in srgb, var(--color-text) 72%, transparent)">
+          <li>Workflow and approval routing</li>
+          <li>Document intake and extraction</li>
+          <li>Exception handling and alerting</li>
+        </ul>
+      </div>
+      <div style="border-top:2px solid var(--color-divider);padding-top:20px">
+
+        <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:22px;line-height:24px;letter-spacing:0.02em;text-transform:uppercase;margin:0">Consulting &amp; training</h2>
+        <p style="font-size:15px;line-height:24px;margin:16px 0 0;color:color-mix(in srgb, var(--color-text) 80%, transparent)">Advice and hands-on training so the system keeps running after we leave. We write the runbook, train the operators, and hand over the source.</p>
+        <ul style="margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;line-height:20px;color:color-mix(in srgb, var(--color-text) 72%, transparent)">
+          <li>Technical due diligence</li>
+          <li>Operator and admin training</li>
+          <li>Handover, runbooks and source</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="ai" style="padding:0 0 80px">
+    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">03 · AI capability</span>
+    <hr style="height:1px;border:0;margin:0 0 32px;background:var(--color-divider)" />
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,64px);align-items:start">
+      <div>
+        <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(30px,3.4vw,40px);line-height:1.08;letter-spacing:0.02em;text-transform:uppercase;margin:0">Automation you can audit</h2>
+        <p style="font-size:16px;line-height:26px;margin:20px 0 0;color:color-mix(in srgb, var(--color-text) 82%, transparent)">We use language models where they measurably remove manual effort — reading documents, classifying requests, drafting the routine reply — and nowhere else. Every model step is bounded by a lever a human can pull: a confidence threshold, a review queue, a log, a rollback.</p>
+        <p style="font-size:16px;line-height:26px;margin:20px 0 0;color:color-mix(in srgb, var(--color-text) 82%, transparent)">That is the same discipline we apply to our own practice. Automating our internal delivery work is why a small team can carry engagements of this size at this price — and it is the capability we hand to clients rather than describe.</p>
+        <ul style="margin:24px 0 0;padding:0;list-style:none;display:grid;gap:12px;font-size:15px;line-height:24px;color:color-mix(in srgb, var(--color-text) 80%, transparent)">
+          <li style="display:grid;grid-template-columns:28px 1fr;gap:8px"><span style="color:var(--color-accent-700);font-weight:600;font-size:13px;letter-spacing:0.08em">01</span><span>Integration with Copilot, ChatGPT and comparable platforms already licensed in your business</span></li>
+          <li style="display:grid;grid-template-columns:28px 1fr;gap:8px"><span style="color:var(--color-accent-700);font-weight:600;font-size:13px;letter-spacing:0.08em">02</span><span>Domain-tuned assistants grounded in your own documents and terminology</span></li>
+          <li style="display:grid;grid-template-columns:28px 1fr;gap:8px"><span style="color:var(--color-accent-700);font-weight:600;font-size:13px;letter-spacing:0.08em">03</span><span>Context-aware copilots inside the software your team already opens each morning</span></li>
+          <li style="display:grid;grid-template-columns:28px 1fr;gap:8px"><span style="color:var(--color-accent-700);font-weight:600;font-size:13px;letter-spacing:0.08em">04</span><span>Evaluation harnesses, so a model change is a measured change and not a surprise</span></li>
+        </ul>
+      </div>
+      <figure style="margin:0;padding-top:20px;border-top:2px solid var(--color-divider)">
+
+        <figcaption style="font-size:13px;line-height:24px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:color-mix(in srgb, var(--color-text) 70%, transparent);margin:0 0 20px">Fig. 01 — a bounded model step</figcaption>
+        <div style="display:grid;gap:0;justify-items:stretch">
+          <div style="background:color-mix(in srgb, var(--color-text) 6%, transparent);padding:14px;text-align:center;font-family:var(--font-heading);font-size:16px;letter-spacing:0.04em;text-transform:uppercase">Intake</div>
+          <div style="height:20px;display:flex;align-items:center;justify-content:center;color:var(--color-accent-2-700);font-size:13px;line-height:1">↓</div>
+          <div style="background:color-mix(in srgb, var(--color-text) 6%, transparent);padding:14px;text-align:center;font-family:var(--font-heading);font-size:16px;letter-spacing:0.04em;text-transform:uppercase">Extract</div>
+          <div style="height:20px;display:flex;align-items:center;justify-content:center;color:var(--color-accent-2-700);font-size:13px;line-height:1">↓</div>
+          <div style="color:var(--color-accent-900);background:var(--color-accent-2);padding:14px;text-align:center;font-family:var(--font-heading);font-size:16px;letter-spacing:0.04em;text-transform:uppercase">Model</div>
+          <div style="height:20px;display:flex;align-items:center;justify-content:center;color:var(--color-accent-2-700);font-size:13px;line-height:1">↓</div>
+          <div style="background:color-mix(in srgb, var(--color-text) 6%, transparent);padding:14px;text-align:center;font-family:var(--font-heading);font-size:16px;letter-spacing:0.04em;text-transform:uppercase">Act</div>
+        </div>
+        <div style="margin-top:24px">
+          <span style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin-bottom:12px">Audit levers</span>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+            <span style="background:color-mix(in srgb, var(--color-text) 6%, transparent);padding:8px 10px;font-size:13px;line-height:18px">Confidence threshold</span>
+            <span style="background:color-mix(in srgb, var(--color-text) 6%, transparent);padding:8px 10px;font-size:13px;line-height:18px">Human review queue</span>
+            <span style="background:color-mix(in srgb, var(--color-text) 6%, transparent);padding:8px 10px;font-size:13px;line-height:18px">Immutable decision log</span>
+            <span style="background:color-mix(in srgb, var(--color-text) 6%, transparent);padding:8px 10px;font-size:13px;line-height:18px">One-step rollback</span>
+          </div>
+        </div>
+        <p style="margin:16px 0 0;font-size:13px;line-height:20px;color:color-mix(in srgb, var(--color-text) 70%, transparent)">No step reaches <em>Act</em> unattended unless it clears the threshold; everything below it queues for a person, and every outcome is logged either way.</p>
+      </figure>
+    </div>
+    <p style="font-size:14px;line-height:24px;margin:32px 0 0;color:color-mix(in srgb, var(--color-text) 70%, transparent);max-width:70ch">ContractDrop, our own contract-handling tool, is built on this pattern.</p>
+  </section>
+
+  <section id="method" style="padding:0 0 80px">
+    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">04 · How we work</span>
+    <hr style="height:1px;border:0;margin:0 0 32px;background:var(--color-divider)" />
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(24px,3vw,40px)">
+      <div style="border-top:2px solid var(--color-accent-2);padding-top:16px">
+        <span style="display:block;font-family:var(--font-heading);font-size:32px;line-height:1;color:var(--color-accent-700)">01</span>
+        <h3 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:20px;line-height:24px;letter-spacing:0.02em;text-transform:uppercase;margin:12px 0 0">Review</h3>
+        <p style="font-size:15px;line-height:24px;margin:12px 0 0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">A short, scoped engagement to start. We sit with the people doing the work and document the process as it really runs.</p>
+      </div>
+      <div style="border-top:1px solid var(--color-divider);padding-top:16px">
+        <span style="display:block;font-family:var(--font-heading);font-size:32px;line-height:1;color:var(--color-accent-700)">02</span>
+        <h3 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:20px;line-height:24px;letter-spacing:0.02em;text-transform:uppercase;margin:12px 0 0">Scope</h3>
+        <p style="font-size:15px;line-height:24px;margin:12px 0 0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">A written scope with a fixed price, the assumptions it rests on, and what we would not build. You can take it to another firm.</p>
+      </div>
+      <div style="border-top:1px solid var(--color-divider);padding-top:16px">
+        <span style="display:block;font-family:var(--font-heading);font-size:32px;line-height:1;color:var(--color-accent-700)">03</span>
+        <h3 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:20px;line-height:24px;letter-spacing:0.02em;text-transform:uppercase;margin:12px 0 0">Build</h3>
+        <p style="font-size:15px;line-height:24px;margin:12px 0 0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">Short increments, something usable at the end of each. Automation ships behind its levers, in review mode, before it runs on its own.</p>
+      </div>
+      <div style="border-top:1px solid var(--color-divider);padding-top:16px">
+        <span style="display:block;font-family:var(--font-heading);font-size:32px;line-height:1;color:var(--color-accent-700)">04</span>
+        <h3 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:20px;line-height:24px;letter-spacing:0.02em;text-transform:uppercase;margin:12px 0 0">Hand over</h3>
+        <p style="font-size:15px;line-height:24px;margin:12px 0 0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">Source, runbook and training to your team. Ongoing support is a separate agreement, not a dependency we design in.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" style="padding:0 0 80px">
+    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">05 · About</span>
+    <hr style="height:1px;border:0;margin:0 0 32px;background:var(--color-divider)" />
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,64px);align-items:start">
+      <div>
+        <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(28px,3.2vw,38px);line-height:1.1;letter-spacing:0.02em;text-transform:uppercase;margin:0">A small team that has done this before</h2>
+        <p style="font-size:16px;line-height:26px;margin:20px 0 0;color:color-mix(in srgb, var(--color-text) 82%, transparent)">Paperdrop was formed by product managers, trainers, designers, architects and developers with fifty years of combined industry experience. We work with small and midsize businesses whose processes still run on paper and attachments — work that is slow, error-prone and more expensive than it looks on the ledger.</p>
+        <p style="font-size:16px;line-height:26px;margin:20px 0 0;color:color-mix(in srgb, var(--color-text) 82%, transparent)">We stay deliberately small and take fewer engagements than we could. The people you meet in the review are the people who build the thing.</p>
+      </div>
+      <div style="border-top:2px solid var(--color-divider);padding-top:20px">
+
+        <span style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin-bottom:8px">Disciplines in the team</span>
+        <div style="display:grid;gap:0">
+          <span style="padding:10px 0;border-bottom:1px solid color-mix(in srgb, var(--color-text) 8%, transparent);font-size:15px;line-height:22px">Product management</span>
+          <span style="padding:10px 0;border-bottom:1px solid color-mix(in srgb, var(--color-text) 8%, transparent);font-size:15px;line-height:22px">Solution architecture</span>
+          <span style="padding:10px 0;border-bottom:1px solid color-mix(in srgb, var(--color-text) 8%, transparent);font-size:15px;line-height:22px">Software engineering</span>
+          <span style="padding:10px 0;border-bottom:1px solid color-mix(in srgb, var(--color-text) 8%, transparent);font-size:15px;line-height:22px">Interaction &amp; service design</span>
+          <span style="padding:10px 0;font-size:15px;line-height:22px">Training &amp; change management</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="contact" style="padding:0 0 80px">
+    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">06 · Contact</span>
+    <hr style="height:1px;border:0;margin:0 0 32px;background:var(--color-divider)" />
+    <div style="padding-top:20px;border-top:2px solid var(--color-accent-2)">
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,64px);align-items:start">
+        <div>
+          <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(28px,3.2vw,38px);line-height:1.1;letter-spacing:0.02em;text-transform:uppercase;margin:0">Describe the process</h2>
+          <p style="font-size:16px;line-height:26px;margin:20px 0 0;max-width:52ch;color:color-mix(in srgb, var(--color-text) 82%, transparent)">Email us a paragraph about the workflow that costs you the most time. We will reply with what we would look at first, and whether a review is worth your money.</p>
+          <a class="btn btn-primary" href="mailto:hello@paperdrop.io?subject=Process%20review%20enquiry" style="margin-top:24px;color:var(--color-bg)">hello@paperdrop.io</a>
+        </div>
+        <div style="display:grid;gap:0">
+          <div style="padding:12px 0;border-top:1px solid var(--color-divider);display:grid;grid-template-columns:110px 1fr;gap:16px;font-size:15px;line-height:22px">
+            <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 60%, transparent)">Email</span>
+            <a href="mailto:hello@paperdrop.io">hello@paperdrop.io</a>
+          </div>
+          <div style="padding:12px 0;border-top:1px solid var(--color-divider);display:grid;grid-template-columns:110px 1fr;gap:16px;font-size:15px;line-height:22px">
+            <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 60%, transparent)">Toronto</span>
+            <a href="tel:+14374496106">+1 437 449 6106</a>
+          </div>
+          <div style="padding:12px 0;border-top:1px solid var(--color-divider);display:grid;grid-template-columns:110px 1fr;gap:16px;font-size:15px;line-height:22px">
+            <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 60%, transparent)">Pune</span>
+            <a href="tel:+917276197537">+91 7276 197 537</a>
+          </div>
+          <div style="padding:12px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider);display:grid;grid-template-columns:110px 1fr;gap:16px;font-size:15px;line-height:22px">
+            <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 60%, transparent)">Locations</span>
+            <span>Toronto, Canada · Pune, India</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="careers" style="padding:0 0 24px">
+    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">07 · Careers</span>
+    <hr style="height:1px;border:0;margin:0 0 32px;background:var(--color-divider)" />
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,64px);align-items:start">
+      <div>
+        <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(26px,3vw,34px);line-height:1.1;letter-spacing:0.02em;text-transform:uppercase;margin:0">Open applications</h2>
+        <p style="font-size:16px;line-height:26px;margin:20px 0 0;color:color-mix(in srgb, var(--color-text) 82%, transparent)">We hire irregularly and only for work we already have. If you build automation, integrate systems, or teach people to use them — in Toronto or Pune — send a note and something you have shipped. We answer every application.</p>
+        <a class="btn btn-secondary" href="mailto:hello@paperdrop.io?subject=Open%20application" style="margin-top:24px">Send an application</a>
+      </div>
+      <div style="align-self:start">
+        <p style="font-size:15px;line-height:24px;margin:0;color:color-mix(in srgb, var(--color-text) 72%, transparent)">Tell us which discipline you work in, where you are based, and one thing you have taken from paper to production.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;padding:48px 0;font-size:13px;line-height:24px;color:color-mix(in srgb, var(--color-text) 70%, transparent)">
+    <span>© 2026 Paperdrop. Toronto · Pune.</span>
+    <span><a href="mailto:hello@paperdrop.io">hello@paperdrop.io</a></span>
   </footer>
 
-  <div id="toast" class="toast">Copied to clipboard</div>
+</div>
 
-  <script>
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-    }
-
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        showToast();
-      }, err => {
-        console.error('Error copying text: ', err);
-      });
-    }
-
-    function showToast() {
-      const toast = document.getElementById('toast');
-      toast.className = 'toast show';
-      setTimeout(() => { toast.className = toast.className.replace('show', ''); }, 3000);
-    }
-
-    // Smooth scroll for anchor links
-    document.addEventListener('DOMContentLoaded', function() {
-      // Load dark mode preference
-      if (localStorage.getItem('darkMode') === 'true') {
-        document.body.classList.add('dark-mode');
-      }
-
-      // Intersection Observer for fade-in animations
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, observerOptions);
-
-      // Observe all fade-in elements
-      document.querySelectorAll('.fade-in-on-scroll').forEach(el => {
-        observer.observe(el);
-      });
-
-      // Smooth scroll for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        });
-      });
-    });
-  </script>
 </body>
-
 </html>
