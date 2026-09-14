@@ -45,6 +45,17 @@
     { "@type": "ContactPoint", "contactType": "sales", "telephone": "+91-7276197537", "email": "hello@paperdrop.io", "areaServed": "IN" }
   ],
   "knowsAbout": ["Digital transformation", "Business process automation", "Document automation", "Large language models", "AI integration", "Workflow software"],
+  "makesOffer": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "SoftwareApplication",
+      "name": "Beredo",
+      "url": "https://beredo.io/",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Document collection that shows whose turn it is. Set a multi-party process up once and run every client on it; clients follow an emailed link and never make an account."
+    }
+  },
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Services",
@@ -52,7 +63,7 @@
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital transformation", "description": "Paper forms, shared inboxes and spreadsheets replaced with systems of record." } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Process automation", "description": "Intake, routing, approval chasing and re-keying handed to software, with exceptions escalated to a named person." } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Consulting and training", "description": "Technical due diligence, operator training, runbooks and handover." } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI and LLM integration", "description": "Bounded, auditable model steps integrated with Copilot, ChatGPT and comparable platforms." } }
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI and LLM integration", "description": "Bounded, auditable model steps integrated with Copilot, ChatGPT, Claude, Azure OpenAI and comparable platforms, hosted or run offline on your own hardware." } }
     ]
   }
 }
@@ -60,6 +71,8 @@
 <link rel="stylesheet" href="assets/industry.css">
 <style>
 html { scroll-behavior: smooth; }
+/* The nav is sticky, so anchor targets need to land below it, not under it. */
+section[id] { scroll-margin-top: 72px; }
 body { margin: 0; text-wrap: pretty; background: var(--color-bg); color: var(--color-text); }
 a { color: var(--color-accent-700); text-decoration: none; }
 a:hover { color: var(--color-accent); }
@@ -96,21 +109,49 @@ a:hover { color: var(--color-accent); }
    rather than letting it force the page sideways on a phone. */
 .table-scroll { overflow-x: auto; }
 .table-scroll > .table { min-width: 620px; }
+/* Logo strip in the AI capability section: wordmarks with their marks,
+   set in the heading face so they read like the rest of the sheet. */
+.logo-strip { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 clamp(24px, 3vw, 48px); }
+.logo-strip li { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent); min-width: 0; }
+.logo-strip li > span { min-width: 0; }
+.logo-strip li > span > * { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 720px) { .logo-strip { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 440px) { .logo-strip { grid-template-columns: 1fr; } }
+/* The Beredo wordmark, as the product draws it: two corner ticks in its steel
+   accent bracketing the name, set in the same condensed face this site uses. */
+.beredo-brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-weight: 600; font-size: 34px; line-height: 1; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text); }
+.beredo-tick { display: block; width: 11px; height: 11px; flex: none; }
+.beredo-tick-l { align-self: flex-start; border-top: 2px solid #5980a6; border-left: 2px solid #5980a6; }
+.beredo-tick-r { align-self: flex-end; border-bottom: 2px solid #5980a6; border-right: 2px solid #5980a6; }
+/* Fig. 02: a five-stage delivery chain with arrows between the stages,
+   drawn with the same grey blocks as Fig. 01. */
+.chain { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.chain > span { position: relative; background: color-mix(in srgb, var(--color-text) 6%, transparent); padding: 12px 4px; text-align: center; font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 13px; line-height: 16px; letter-spacing: 0.04em; text-transform: uppercase; }
+.chain > span + span::before { content: "→"; position: absolute; left: -8px; top: 50%; transform: translate(-50%, -50%); color: var(--color-accent-2-700); font-size: 12px; line-height: 1; }
+@media (max-width: 480px) {
+  .chain { gap: 12px; }
+  .chain > span { font-size: 11px; letter-spacing: 0.02em; padding: 10px 2px; }
+  .chain > span + span::before { left: -6px; font-size: 10px; }
+}
+.logo-strip img { width: 28px; height: 28px; display: block; flex: none; }
+.logo-strip b { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 22px; line-height: 24px; letter-spacing: 0.02em; text-transform: uppercase; }
+.logo-strip small { display: block; font-size: 13px; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 60%, transparent); }
 </style>
 </head>
 <body>
 
-<nav class="nav" style="position:sticky;top:0;z-index:20;background:var(--color-bg);border-bottom:1px solid var(--color-divider);padding-inline:max(24px, calc((100% - 1160px) / 2 + 24px))">
-  <span class="nav-brand" style="display:flex;align-items:center;gap:10px;letter-spacing:0.05em;text-transform:uppercase;font-size:26px">
+<nav id="top" class="nav" style="position:sticky;top:0;z-index:20;background:var(--color-bg);border-bottom:1px solid var(--color-divider);padding-inline:max(24px, calc((100% - 1160px) / 2 + 24px))">
+  <a class="nav-brand" href="#top" aria-label="Paperdrop — back to top" style="display:flex;align-items:center;gap:10px;letter-spacing:0.05em;text-transform:uppercase;font-size:26px">
     <img src="assets/mark.png" alt="" style="height:34px;width:34px;display:block;object-fit:contain" />
     <span><span style="color:var(--color-accent)">Paper</span><span style="color:var(--color-accent-2-700)">drop</span></span>
-  </span>
+  </a>
   <a href="#services">Services</a>
   <a href="#ai">AI capability</a>
   <a href="#method">Method</a>
   <a href="#about">About</a>
+  <a href="#beredo">Beredo</a>
   <a href="#careers">Careers</a>
-  <a class="btn btn-primary" href="mailto:hello@paperdrop.io?subject=Enquiry%20from%20paperdrop.io" style="color:var(--color-bg)">Email us</a>
+  <a class="btn btn-primary" href="https://beredo.io/start/6f3ce085954fdb059ed47274797a8f5e78dbb2ca63724382291001de504575f4" target="_blank" rel="noopener" style="color:var(--color-bg)">Contact us</a>
 </nav>
 
 <div style="max-width:1160px;margin:0 auto;padding:0 clamp(20px,5vw,64px)">
@@ -126,7 +167,7 @@ a:hover { color: var(--color-accent); }
       We are a consultancy for small and midsize organisations that still run on forms, email attachments and manual re-keying. We map the process, automate the parts that should not need a person, and leave an audit trail on every step a machine takes.
     </p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:32px">
-      <a class="btn btn-primary" href="mailto:hello@paperdrop.io?subject=Process%20review%20enquiry" style="color:var(--color-bg)">hello@paperdrop.io</a>
+      <a class="btn btn-primary" href="https://beredo.io/start/6f3ce085954fdb059ed47274797a8f5e78dbb2ca63724382291001de504575f4" target="_blank" rel="noopener" style="color:var(--color-bg)">Contact us</a>
       <a class="btn btn-secondary" href="#method">How we work</a>
     </div>
   </section>
@@ -154,7 +195,7 @@ a:hover { color: var(--color-accent); }
             <td style="padding:12px 24px 12px 0;font-size:13px;font-weight:600;letter-spacing:0.08em;color:var(--color-accent-700)">01</td>
             <td style="padding:12px 24px 12px 0;font-size:15px;line-height:24px">Combined industry experience</td>
             <td style="padding:12px 24px 12px 0;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:22px;line-height:24px;white-space:nowrap">50 years</td>
-            <td style="padding:12px 24px 12px 0;font-size:15px;line-height:24px;color:color-mix(in srgb, var(--color-text) 78%, transparent)">Across product, design, architecture and delivery</td>
+            <td style="padding:12px 24px 12px 0;font-size:15px;line-height:24px;color:color-mix(in srgb, var(--color-text) 78%, transparent)">Across product, design, architecture and delivery, carried end to end by a very small team</td>
           </tr>
           <tr>
             <td style="padding:12px 24px 12px 0;font-size:13px;font-weight:600;letter-spacing:0.08em;color:var(--color-accent-700)">02</td>
@@ -231,6 +272,7 @@ a:hover { color: var(--color-accent); }
           <li style="display:grid;grid-template-columns:28px 1fr;gap:8px"><span style="color:var(--color-accent-700);font-weight:600;font-size:13px;letter-spacing:0.08em">02</span><span>Domain-tuned assistants grounded in your own documents and terminology</span></li>
           <li style="display:grid;grid-template-columns:28px 1fr;gap:8px"><span style="color:var(--color-accent-700);font-weight:600;font-size:13px;letter-spacing:0.08em">03</span><span>Context-aware copilots inside the software your team already opens each morning</span></li>
           <li style="display:grid;grid-template-columns:28px 1fr;gap:8px"><span style="color:var(--color-accent-700);font-weight:600;font-size:13px;letter-spacing:0.08em">04</span><span>Evaluation harnesses, so a model change is a measured change and not a surprise</span></li>
+          <li style="display:grid;grid-template-columns:28px 1fr;gap:8px"><span style="color:var(--color-accent-700);font-weight:600;font-size:13px;letter-spacing:0.08em">05</span><span>Offline AI: open models run on your own hardware, so documents never leave your network</span></li>
         </ul>
       </div>
       <figure style="margin:0;padding-top:20px;border-top:2px solid var(--color-divider)">
@@ -257,7 +299,19 @@ a:hover { color: var(--color-accent); }
         <p style="margin:16px 0 0;font-size:13px;line-height:20px;color:color-mix(in srgb, var(--color-text) 70%, transparent)">No step reaches <em>Act</em> unattended unless it clears the threshold; everything below it queues for a person, and every outcome is logged either way.</p>
       </figure>
     </div>
-    <p style="font-size:14px;line-height:24px;margin:32px 0 0;color:color-mix(in srgb, var(--color-text) 70%, transparent);max-width:70ch">ContractDrop, our own contract-handling tool, is built on this pattern.</p>
+    <div style="margin-top:48px;padding-top:20px;border-top:2px solid var(--color-divider)">
+      <span style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin-bottom:8px">Models and platforms we have shipped with</span>
+      <ul class="logo-strip">
+        <li><img src="assets/logos/claude.svg" alt="Claude logo" width="28" height="28" /><span><b>Claude</b><small>Anthropic</small></span></li>
+        <li><img src="assets/logos/openrouter.svg" alt="OpenRouter logo" width="28" height="28" /><span><b>OpenRouter</b><small>Multi-model gateway</small></span></li>
+        <li><img src="assets/logos/ollama.svg" alt="Ollama logo" width="28" height="28" /><span><b>Ollama</b><small>Local &amp; on-premise models</small></span></li>
+        <li><img src="assets/logos/moonshot.svg" alt="Moonshot AI logo" width="28" height="28" /><span><b>Moonshot AI</b><small>Kimi models</small></span></li>
+        <li><img src="assets/logos/openai.svg" alt="OpenAI logo" width="28" height="28" /><span><b>OpenAI</b><small>GPT &amp; ChatGPT</small></span></li>
+        <li><img src="assets/logos/azure.svg" alt="Microsoft Azure logo" width="28" height="28" /><span><b>Microsoft Azure</b><small>Azure OpenAI &amp; Copilot</small></span></li>
+      </ul>
+      <p style="margin:12px 0 0;font-size:13px;line-height:20px;color:color-mix(in srgb, var(--color-text) 60%, transparent)">Hosted or offline, depending on where your data is allowed to go. Logos are the property of their owners and indicate delivered work, not a partnership.</p>
+    </div>
+    <p style="font-size:14px;line-height:24px;margin:32px 0 0;color:color-mix(in srgb, var(--color-text) 70%, transparent);max-width:70ch"><a href="#beredo">Beredo</a>, the document-collection product we built, runs on this pattern: the assistant drafts the process and never reads what clients submit.</p>
   </section>
 
   <section id="method" style="padding:0 0 80px">
@@ -292,13 +346,36 @@ a:hover { color: var(--color-accent); }
     <hr style="height:1px;border:0;margin:0 0 32px;background:var(--color-divider)" />
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,64px);align-items:start">
       <div>
-        <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(28px,3.2vw,38px);line-height:1.1;letter-spacing:0.02em;text-transform:uppercase;margin:0">A small team that has done this before</h2>
+        <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(28px,3.2vw,38px);line-height:1.1;letter-spacing:0.02em;text-transform:uppercase;margin:0">A very small team, on purpose</h2>
         <p style="font-size:16px;line-height:26px;margin:20px 0 0;color:color-mix(in srgb, var(--color-text) 82%, transparent)">Paperdrop was formed by product managers, trainers, designers, architects and developers with fifty years of combined industry experience. We work with small and midsize businesses whose processes still run on paper and attachments — work that is slow, error-prone and more expensive than it looks on the ledger.</p>
-        <p style="font-size:16px;line-height:26px;margin:20px 0 0;color:color-mix(in srgb, var(--color-text) 82%, transparent)">We stay deliberately small and take fewer engagements than we could. The people you meet in the review are the people who build the thing.</p>
+        <p style="font-size:16px;line-height:26px;margin:20px 0 0;color:color-mix(in srgb, var(--color-text) 82%, transparent)">A conventional delivery team is a chain of verticals: analysis hands to design, design to build, build to test, test to documentation. Every handover costs time and loses detail. We use AI to collapse that chain. The same few people carry an engagement from process review to runbook, with language models doing the drafting, scaffolding, test generation and documentation that used to need a separate role each.</p>
+        <p style="font-size:16px;line-height:26px;margin:20px 0 0;color:color-mix(in srgb, var(--color-text) 82%, transparent)">That is why we stay very small and take fewer engagements than we could. The people you meet in the review are the people who build the thing, and there is nobody in between.</p>
       </div>
-      <div style="border-top:2px solid var(--color-divider);padding-top:20px">
+      <div>
+        <figure style="margin:0;padding-top:20px;border-top:2px solid var(--color-divider)">
+          <figcaption style="font-size:13px;line-height:24px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:color-mix(in srgb, var(--color-text) 70%, transparent);margin:0 0 20px">Fig. 02 — delivery verticals, collapsed</figcaption>
 
-        <span style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin-bottom:8px">Disciplines in the team</span>
+          <span style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin-bottom:10px">Conventional team</span>
+          <div class="chain">
+            <span>Analyse</span><span>Design</span><span>Build</span><span>Test</span><span>Document</span>
+          </div>
+          <p style="margin:10px 0 0;font-size:13px;line-height:20px;color:color-mix(in srgb, var(--color-text) 70%, transparent)">Five roles, four handovers. Each one costs time and loses detail.</p>
+
+          <div style="height:28px;display:flex;align-items:center;justify-content:center;color:var(--color-accent-2-700);font-size:13px;line-height:1">↓</div>
+
+          <span style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin-bottom:10px">Paperdrop</span>
+          <div style="color:var(--color-accent-900);background:var(--color-accent-2);padding:14px;text-align:center;font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:16px;letter-spacing:0.04em;text-transform:uppercase">The same few people, review to handover</div>
+          <div style="margin-top:8px;display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+            <span style="background:color-mix(in srgb, var(--color-text) 6%, transparent);padding:8px 10px;font-size:13px;line-height:18px">Drafting specs &amp; runbooks</span>
+            <span style="background:color-mix(in srgb, var(--color-text) 6%, transparent);padding:8px 10px;font-size:13px;line-height:18px">Scaffolding code</span>
+            <span style="background:color-mix(in srgb, var(--color-text) 6%, transparent);padding:8px 10px;font-size:13px;line-height:18px">Generating tests</span>
+            <span style="background:color-mix(in srgb, var(--color-text) 6%, transparent);padding:8px 10px;font-size:13px;line-height:18px">Writing documentation</span>
+          </div>
+          <p style="margin:10px 0 0;font-size:13px;line-height:20px;color:color-mix(in srgb, var(--color-text) 70%, transparent)">The grey work is carried by language models and reviewed by the person who owns the engagement. No handovers.</p>
+        </figure>
+
+        <div style="margin-top:32px;border-top:2px solid var(--color-divider);padding-top:20px">
+        <span style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin-bottom:8px">Disciplines, carried by the same few people</span>
         <div style="display:grid;gap:0">
           <span style="padding:10px 0;border-bottom:1px solid color-mix(in srgb, var(--color-text) 8%, transparent);font-size:15px;line-height:22px">Product management</span>
           <span style="padding:10px 0;border-bottom:1px solid color-mix(in srgb, var(--color-text) 8%, transparent);font-size:15px;line-height:22px">Solution architecture</span>
@@ -306,26 +383,85 @@ a:hover { color: var(--color-accent); }
           <span style="padding:10px 0;border-bottom:1px solid color-mix(in srgb, var(--color-text) 8%, transparent);font-size:15px;line-height:22px">Interaction &amp; service design</span>
           <span style="padding:10px 0;font-size:15px;line-height:22px">Training &amp; change management</span>
         </div>
+        </div>
       </div>
     </div>
   </section>
 
 
+  <section id="beredo" style="padding:0 0 80px">
+    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">06 · Product</span>
+    <hr style="height:1px;border:0;margin:0 0 32px;background:var(--color-divider)" />
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,64px);align-items:start">
+      <div>
+        <a class="beredo-brand" href="https://beredo.io" target="_blank" rel="noopener" aria-label="Beredo (opens beredo.io)"><span class="beredo-tick beredo-tick-l" aria-hidden="true"></span>Beredo<span class="beredo-tick beredo-tick-r" aria-hidden="true"></span></a>
+        <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(28px,3.2vw,38px);line-height:1.1;letter-spacing:0.02em;text-transform:uppercase;margin:20px 0 0">Set your process up once. Run it forever.</h2>
+        <p style="font-size:16px;line-height:26px;margin:20px 0 0;color:color-mix(in srgb, var(--color-text) 82%, transparent)">Beredo is the product we built for firms that collect documents from clients. A mortgage application, a tax return, a new-client onboarding: the same steps, the same documents, the same signatures, every time — and every time rebuilt by hand in somebody's inbox. The work is not hard. Keeping track of it is.</p>
+        <p style="font-size:16px;line-height:26px;margin:20px 0 0;color:color-mix(in srgb, var(--color-text) 82%, transparent)">You write the process down once: who does what, in what order. Every client after that runs on it. Each person is asked for one thing at a time, in the right order, and the firm stops carrying the process in its head.</p>
+        <ul style="margin:24px 0 0;padding:0;list-style:none;display:grid;gap:12px;font-size:15px;line-height:24px;color:color-mix(in srgb, var(--color-text) 80%, transparent)">
+          <li style="display:grid;grid-template-columns:28px 1fr;gap:8px"><span style="color:var(--color-accent-700);font-weight:600;font-size:13px;letter-spacing:0.08em">01</span><span>Your clients never make an account. They follow a link from an email and do the one thing waiting on them.</span></li>
+          <li style="display:grid;grid-template-columns:28px 1fr;gap:8px"><span style="color:var(--color-accent-700);font-weight:600;font-size:13px;letter-spacing:0.08em">02</span><span>It chases people so you do not have to, and tells somebody else if it keeps waiting.</span></li>
+          <li style="display:grid;grid-template-columns:28px 1fr;gap:8px"><span style="color:var(--color-accent-700);font-weight:600;font-size:13px;letter-spacing:0.08em">03</span><span>Unlimited people on every plan. You are not charged for your own customers.</span></li>
+          <li style="display:grid;grid-template-columns:28px 1fr;gap:8px"><span style="color:var(--color-accent-700);font-weight:600;font-size:13px;letter-spacing:0.08em">04</span><span>Built for mortgage brokers, accountants, immigration lawyers, property managers, recruiters, clinics and practices.</span></li>
+        </ul>
+        <a class="btn btn-primary" href="https://beredo.io" target="_blank" rel="noopener" style="margin-top:28px;color:var(--color-bg)">See Beredo at beredo.io</a>
+      </div>
+      <div>
+        <div style="border-top:2px solid var(--color-divider);padding-top:20px">
+          <span style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin-bottom:16px">How it works</span>
+          <div style="display:grid;gap:20px">
+            <div style="border-top:1px solid var(--color-divider);padding-top:14px;display:grid;grid-template-columns:44px 1fr;gap:12px">
+              <span style="font-family:var(--font-heading);font-size:28px;line-height:1;color:var(--color-accent-700)">01</span>
+              <div>
+                <h3 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:18px;line-height:22px;letter-spacing:0.02em;text-transform:uppercase;margin:0">Build the flow</h3>
+                <p style="font-size:14px;line-height:22px;margin:6px 0 0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">Steps, and the forms, uploads, signatures and approvals in each. Say who each one belongs to and what counts as done.</p>
+              </div>
+            </div>
+            <div style="border-top:1px solid var(--color-divider);padding-top:14px;display:grid;grid-template-columns:44px 1fr;gap:12px">
+              <span style="font-family:var(--font-heading);font-size:28px;line-height:1;color:var(--color-accent-700)">02</span>
+              <div>
+                <h3 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:18px;line-height:22px;letter-spacing:0.02em;text-transform:uppercase;margin:0">Start an application</h3>
+                <p style="font-size:14px;line-height:22px;margin:6px 0 0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">One mortgage, one tax return, one onboarding. Invite the people involved; they need no account and no software, just the link they were emailed.</p>
+              </div>
+            </div>
+            <div style="border-top:1px solid var(--color-divider);padding-top:14px;display:grid;grid-template-columns:44px 1fr;gap:12px">
+              <span style="font-family:var(--font-heading);font-size:28px;line-height:1;color:var(--color-accent-700)">03</span>
+              <div>
+                <h3 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:18px;line-height:22px;letter-spacing:0.02em;text-transform:uppercase;margin:0">It runs</h3>
+                <p style="font-size:14px;line-height:22px;margin:6px 0 0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">Each person sees the one thing waiting on them and nothing else. When they finish, the next thing opens for whoever it belongs to, and the firm can see where every application has got to.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:28px">
+          <span style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin-bottom:12px">Trust, for firms handing over identity documents</span>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+            <span style="background:color-mix(in srgb, var(--color-text) 6%, transparent);padding:8px 10px;font-size:13px;line-height:18px">Every file and answer encrypted under its own key</span>
+            <span style="background:color-mix(in srgb, var(--color-text) 6%, transparent);padding:8px 10px;font-size:13px;line-height:18px">Deleting destroys the key, not just the row</span>
+            <span style="background:color-mix(in srgb, var(--color-text) 6%, transparent);padding:8px 10px;font-size:13px;line-height:18px">Audit trail of field names, never values</span>
+            <span style="background:color-mix(in srgb, var(--color-text) 6%, transparent);padding:8px 10px;font-size:13px;line-height:18px">Signed PDFs carry a certificate anyone can verify</span>
+          </div>
+          <p style="margin:12px 0 0;font-size:13px;line-height:20px;color:color-mix(in srgb, var(--color-text) 70%, transparent)">Priced by how many applications you have open at once, not per person and not per start. Finish one and the space is yours again.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="contact" style="padding:0 0 80px">
-    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">06 · Contact</span>
+    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">07 · Contact</span>
     <hr style="height:1px;border:0;margin:0 0 32px;background:var(--color-divider)" />
     <div style="padding-top:20px;border-top:2px solid var(--color-accent-2)">
 
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,64px);align-items:start">
         <div>
-          <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(28px,3.2vw,38px);line-height:1.1;letter-spacing:0.02em;text-transform:uppercase;margin:0">Describe the process</h2>
-          <p style="font-size:16px;line-height:26px;margin:20px 0 0;max-width:52ch;color:color-mix(in srgb, var(--color-text) 82%, transparent)">Email us a paragraph about the workflow that costs you the most time. We will reply with what we would look at first, and whether a review is worth your money.</p>
-          <a class="btn btn-primary" href="mailto:hello@paperdrop.io?subject=Process%20review%20enquiry" style="margin-top:24px;color:var(--color-bg)">hello@paperdrop.io</a>
+          <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(28px,3.2vw,38px);line-height:1.1;letter-spacing:0.02em;text-transform:uppercase;margin:0"><a href="https://beredo.io/start/6f3ce085954fdb059ed47274797a8f5e78dbb2ca63724382291001de504575f4" target="_blank" rel="noopener" style="color:inherit">Describe the process</a></h2>
+          <p style="font-size:16px;line-height:26px;margin:20px 0 0;max-width:52ch;color:color-mix(in srgb, var(--color-text) 82%, transparent)">Tell us about the workflow that costs you the most time, through the contact form. We will reply with what we would look at first, and whether a review is worth your money.</p>
+          <a class="btn btn-primary" href="https://beredo.io/start/6f3ce085954fdb059ed47274797a8f5e78dbb2ca63724382291001de504575f4" target="_blank" rel="noopener" style="margin-top:24px;color:var(--color-bg)">Contact us</a>
         </div>
         <div style="display:grid;gap:0">
           <div style="padding:12px 0;border-top:1px solid var(--color-divider);display:grid;grid-template-columns:110px 1fr;gap:16px;font-size:15px;line-height:22px">
-            <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 60%, transparent)">Email</span>
-            <a href="mailto:hello@paperdrop.io">hello@paperdrop.io</a>
+            <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 60%, transparent)">Contact</span>
+            <a href="https://beredo.io/start/6f3ce085954fdb059ed47274797a8f5e78dbb2ca63724382291001de504575f4" target="_blank" rel="noopener">Contact form on Beredo</a>
           </div>
           <div style="padding:12px 0;border-top:1px solid var(--color-divider);display:grid;grid-template-columns:110px 1fr;gap:16px;font-size:15px;line-height:22px">
             <span style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 60%, transparent)">Toronto</span>
@@ -345,13 +481,13 @@ a:hover { color: var(--color-accent); }
   </section>
 
   <section id="careers" style="padding:0 0 24px">
-    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">07 · Careers</span>
+    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">08 · Careers</span>
     <hr style="height:1px;border:0;margin:0 0 32px;background:var(--color-divider)" />
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,64px);align-items:start">
       <div>
         <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:clamp(26px,3vw,34px);line-height:1.1;letter-spacing:0.02em;text-transform:uppercase;margin:0">Open applications</h2>
         <p style="font-size:16px;line-height:26px;margin:20px 0 0;color:color-mix(in srgb, var(--color-text) 82%, transparent)">We hire irregularly and only for work we already have. If you build automation, integrate systems, or teach people to use them — in Toronto or Pune — send a note and something you have shipped. We answer every application.</p>
-        <a class="btn btn-secondary" href="mailto:hello@paperdrop.io?subject=Open%20application" style="margin-top:24px">Send an application</a>
+        <a class="btn btn-secondary" href="https://beredo.io/start/ac608600caef064fca8dbcb79ec9db9ade8b039b1a5290d651b019ffa0a83f65" target="_blank" rel="noopener" style="margin-top:24px">Send an application</a>
       </div>
       <div style="align-self:start">
         <p style="font-size:15px;line-height:24px;margin:0;color:color-mix(in srgb, var(--color-text) 72%, transparent)">Tell us which discipline you work in, where you are based, and one thing you have taken from paper to production.</p>
