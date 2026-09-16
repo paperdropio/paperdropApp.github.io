@@ -10,7 +10,7 @@ import json, html, os, pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = "https://paperdrop.io"
-CONTACT = "https://beredo.io/start/6f3ce085954fdb059ed47274797a8f5e78dbb2ca63724382291001de504575f4"
+CONTACT = "https://beredo.io/start/EKQK-JEYX"
 ORG_ID = SITE + "/#organization"
 
 def esc(s): return html.escape(s, quote=True)
