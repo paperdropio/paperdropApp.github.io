@@ -1,0 +1,110 @@
+/* Site-level tokens and page chrome shared by every page. Design-system
+   primitives live in industry.css; this file only tunes and extends them. */
+html { scroll-behavior: smooth; }
+/* The nav is sticky, so anchor targets need to land below it, not under it. */
+section[id] { scroll-margin-top: 72px; }
+body { margin: 0; text-wrap: pretty; background: var(--color-bg); color: var(--color-text); }
+a { color: var(--color-accent-700); text-decoration: none; }
+a:hover { color: var(--color-accent); }
+:root {
+  --color-accent: #2a00e6;
+  --color-accent-100: #e8e3fd;
+  --color-accent-200: #cfc4fb;
+  --color-accent-300: #a891f6;
+  --color-accent-400: #6b47ef;
+  --color-accent-500: #2a00e6;
+  --color-accent-600: #2400c4;
+  --color-accent-700: #1e00a3;
+  --color-accent-800: #170080;
+  --color-accent-900: #0e0052;
+  --color-accent-2: #2ed3c0;
+  --color-accent-2-100: #d9f7f3;
+  --color-accent-2-200: #b0efe6;
+  --color-accent-2-300: #7ce3d5;
+  --color-accent-2-400: #4ed9c8;
+  --color-accent-2-500: #2ed3c0;
+  --color-accent-2-600: #1fae9e;
+  --color-accent-2-700: #16887b;
+  --color-accent-2-800: #0f6259;
+  --color-accent-2-900: #093c36;
+}
+
+/* The nav is a single flex row in the design system; below the desktop
+   breakpoint the six items no longer fit one line, so let them wrap. */
+@media (max-width: 880px) {
+  .nav { flex-wrap: wrap; gap: 12px 18px; padding-block: 14px; }
+  .nav-brand { flex-basis: 100%; margin-right: 0; }
+}
+/* The spec sheet is a fixed four-column table; give it its own scroller
+   rather than letting it force the page sideways on a phone. */
+.table-scroll { overflow-x: auto; }
+.table-scroll > .table { min-width: 620px; }
+/* Logo strip in the AI capability section: wordmarks with their marks,
+   set in the heading face so they read like the rest of the sheet. */
+.logo-strip { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 clamp(24px, 3vw, 48px); }
+.logo-strip li { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent); min-width: 0; }
+.logo-strip li > span { min-width: 0; }
+.logo-strip li > span > * { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 720px) { .logo-strip { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 440px) { .logo-strip { grid-template-columns: 1fr; } }
+/* The Beredo wordmark, as the product draws it: two corner ticks in its steel
+   accent bracketing the name, set in the same condensed face this site uses. */
+.beredo-brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-weight: 600; font-size: 34px; line-height: 1; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text); }
+.beredo-tick { display: block; width: 11px; height: 11px; flex: none; }
+.beredo-tick-l { align-self: flex-start; border-top: 2px solid #5980a6; border-left: 2px solid #5980a6; }
+.beredo-tick-r { align-self: flex-end; border-bottom: 2px solid #5980a6; border-right: 2px solid #5980a6; }
+/* Fig. 02: a five-stage delivery chain with arrows between the stages,
+   drawn with the same grey blocks as Fig. 01. */
+.chain { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.chain > span { position: relative; background: color-mix(in srgb, var(--color-text) 6%, transparent); padding: 12px 4px; text-align: center; font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 13px; line-height: 16px; letter-spacing: 0.04em; text-transform: uppercase; }
+.chain > span + span::before { content: "→"; position: absolute; left: -8px; top: 50%; transform: translate(-50%, -50%); color: var(--color-accent-2-700); font-size: 12px; line-height: 1; }
+@media (max-width: 480px) {
+  .chain { gap: 12px; }
+  .chain > span { font-size: 11px; letter-spacing: 0.02em; padding: 10px 2px; }
+  .chain > span + span::before { left: -6px; font-size: 10px; }
+}
+.logo-strip img { width: 28px; height: 28px; display: block; flex: none; }
+.logo-strip b { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 22px; line-height: 24px; letter-spacing: 0.02em; text-transform: uppercase; }
+.logo-strip small { display: block; font-size: 13px; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 60%, transparent); }
+
+/* ---- Shared page chrome (home, service, location and 404 pages) ---- */
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px); }
+.kicker { display: block; font-size: 13px; line-height: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--color-accent-700); margin: 0 0 12px; }
+.rule { height: 1px; border: 0; margin: 0 0 32px; background: var(--color-divider); }
+.h-display { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: clamp(38px, 5.4vw, 72px); line-height: 1.04; letter-spacing: 0.01em; text-transform: uppercase; margin: 0 0 0 -0.04em; }
+.h-section { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: clamp(28px, 3.2vw, 38px); line-height: 1.1; letter-spacing: 0.02em; text-transform: uppercase; margin: 0; }
+.h-card { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 22px; line-height: 24px; letter-spacing: 0.02em; text-transform: uppercase; margin: 0; }
+.h-step { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 20px; line-height: 24px; letter-spacing: 0.02em; text-transform: uppercase; margin: 12px 0 0; }
+.step-no { display: block; font-family: var(--font-heading); font-size: 32px; line-height: 1; color: var(--color-accent-700); }
+.lede { font-size: clamp(17px, 1.6vw, 20px); line-height: 1.55; margin: 24px 0 0; max-width: 60ch; color: color-mix(in srgb, var(--color-text) 82%, transparent); }
+.body { font-size: 16px; line-height: 26px; margin: 16px 0 0; max-width: 64ch; color: color-mix(in srgb, var(--color-text) 82%, transparent); }
+.muted { font-size: 15px; line-height: 24px; margin: 12px 0 0; color: color-mix(in srgb, var(--color-text) 78%, transparent); }
+.grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: clamp(24px, 3vw, 40px); }
+.tile { border-top: 1px solid var(--color-divider); padding-top: 16px; }
+.tile-lead { border-top: 2px solid var(--color-accent-2); }
+.plain-list { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 14px; line-height: 20px; color: color-mix(in srgb, var(--color-text) 72%, transparent); }
+.section { padding: 0 0 80px; }
+.hero { padding: 96px 0 72px; }
+.spec-row { padding: 12px 0; border-top: 1px solid var(--color-divider); display: grid; grid-template-columns: 130px 1fr; gap: 16px; font-size: 15px; line-height: 22px; }
+.spec-row:last-child { border-bottom: 1px solid var(--color-divider); }
+.spec-row > span:first-child { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 60%, transparent); }
+.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(24px, 4vw, 64px); align-items: start; }
+.crumbs { font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 60%, transparent); margin: 0 0 20px; }
+.crumbs a { color: inherit; }
+.crumbs a:hover { color: var(--color-accent); }
+.card-link { color: inherit; }
+.card-link:hover { color: var(--color-accent); }
+.footer { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; padding: 48px 0; font-size: 13px; line-height: 24px; color: color-mix(in srgb, var(--color-text) 70%, transparent); }
+.footer-links { display: flex; flex-wrap: wrap; gap: 8px 20px; padding: 24px 0 0; border-top: 1px solid var(--color-divider); font-size: 13px; line-height: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
+.footer-links a { color: color-mix(in srgb, var(--color-text) 70%, transparent); }
+.footer-links a:hover { color: var(--color-accent); }
+/* FAQ: native disclosure widgets so the answers are in the DOM for crawlers
+   and screen readers, and the page needs no script to open them. */
+.faq { margin: 0; padding: 0; }
+.faq details { border-top: 1px solid var(--color-divider); }
+.faq details:last-child { border-bottom: 1px solid var(--color-divider); }
+.faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 24px; align-items: baseline; padding: 18px 0; font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 20px; line-height: 24px; letter-spacing: 0.02em; text-transform: uppercase; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; color: var(--color-accent-2-700); font-size: 24px; line-height: 1; }
+.faq details[open] summary::after { content: "−"; }
+.faq details > p { font-size: 16px; line-height: 26px; margin: 0; padding: 0 0 22px; max-width: 64ch; color: color-mix(in srgb, var(--color-text) 82%, transparent); }

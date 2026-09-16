@@ -35,6 +35,10 @@
   "image": "https://paperdrop.io/assets/og.png",
   "description": "Software consultancy specialising in digital transformation, process automation and auditable AI for small and midsize businesses.",
   "email": "hello@paperdrop.io",
+  "sameAs": [
+    "https://github.com/paperdropio",
+    "https://beredo.io/"
+  ],
   "areaServed": ["CA", "US", "IN"],
   "address": [
     { "@type": "PostalAddress", "addressLocality": "Toronto", "addressRegion": "ON", "addressCountry": "CA" },
@@ -68,78 +72,100 @@
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://paperdrop.io/#faq",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does a process review take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A review is deliberately short. We sit with the people doing the work, document the process as it actually runs, and return a written scope. How long that takes depends on how many teams and documents are involved, so we agree the length and price of the review itself before it starts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is pricing structured?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The review is priced on its own. It ends with a written scope that carries a fixed price, the assumptions it rests on, and a list of what we would not build. You can take that scope to another firm. Ongoing support after handover is a separate agreement if you want one."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when the automation meets something it does not recognise?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It stops and asks. Every model step runs behind a confidence threshold; anything below it queues for a named person with the context attached, and every outcome, human or machine, is written to an immutable log and can be rolled back in one step. Nothing is silently dropped."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does our data leave our network?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only if you decide it can. Where documents must stay on your premises or in your country, we run open models on your own hardware and integrate with the local regions of the platforms you already license. Beredo, our own product, is built so the assistant never reads what clients submit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which AI platforms do you integrate with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The ones already licensed in your business where possible: Microsoft Copilot and Azure OpenAI, ChatGPT and the OpenAI API, Anthropic's Claude, and multi-model gateways such as OpenRouter. For offline work we run open models through Ollama. We have shipped with each of these."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do we have to replace our existing systems?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually not. Digital transformation starts with an inventory of every document, form and spreadsheet in the process and a decision about what each one is for. We retire what nobody reads, keep the systems that are sound, and integrate rather than replace wherever we can."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What do we receive at handover?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Source code, configuration, a runbook for day-to-day operation and exception handling, and training for the operators and administrators who will run it. The system is yours to run without us. We would rather leave a trained team than a support dependency."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who do you work with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Small and midsize organisations: owner-led firms, operations teams and internal IT whose processes still run on paper, attachments and manual re-keying. We are a very small team by design and take fewer engagements than we could, so the people you meet in the review are the people who build."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where are you based, and what hours do you work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Toronto, Canada and Pune, India. The two offices give overlapping coverage across North American and Indian working hours, so a review held in Toronto in the afternoon can be built against in Pune the same evening. See the Toronto and Pune pages."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do we get started?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Describe the workflow that costs you the most time through the contact form. We reply with what we would look at first and an honest view on whether a review is worth your money."
+      }
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@400;600&display=swap">
 <link rel="stylesheet" href="assets/industry.css">
-<style>
-html { scroll-behavior: smooth; }
-/* The nav is sticky, so anchor targets need to land below it, not under it. */
-section[id] { scroll-margin-top: 72px; }
-body { margin: 0; text-wrap: pretty; background: var(--color-bg); color: var(--color-text); }
-a { color: var(--color-accent-700); text-decoration: none; }
-a:hover { color: var(--color-accent); }
-:root {
-  --color-accent: #2a00e6;
-  --color-accent-100: #e8e3fd;
-  --color-accent-200: #cfc4fb;
-  --color-accent-300: #a891f6;
-  --color-accent-400: #6b47ef;
-  --color-accent-500: #2a00e6;
-  --color-accent-600: #2400c4;
-  --color-accent-700: #1e00a3;
-  --color-accent-800: #170080;
-  --color-accent-900: #0e0052;
-  --color-accent-2: #2ed3c0;
-  --color-accent-2-100: #d9f7f3;
-  --color-accent-2-200: #b0efe6;
-  --color-accent-2-300: #7ce3d5;
-  --color-accent-2-400: #4ed9c8;
-  --color-accent-2-500: #2ed3c0;
-  --color-accent-2-600: #1fae9e;
-  --color-accent-2-700: #16887b;
-  --color-accent-2-800: #0f6259;
-  --color-accent-2-900: #093c36;
-}
-
-/* The nav is a single flex row in the design system; below the desktop
-   breakpoint the six items no longer fit one line, so let them wrap. */
-@media (max-width: 880px) {
-  .nav { flex-wrap: wrap; gap: 12px 18px; padding-block: 14px; }
-  .nav-brand { flex-basis: 100%; margin-right: 0; }
-}
-/* The spec sheet is a fixed four-column table; give it its own scroller
-   rather than letting it force the page sideways on a phone. */
-.table-scroll { overflow-x: auto; }
-.table-scroll > .table { min-width: 620px; }
-/* Logo strip in the AI capability section: wordmarks with their marks,
-   set in the heading face so they read like the rest of the sheet. */
-.logo-strip { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 clamp(24px, 3vw, 48px); }
-.logo-strip li { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent); min-width: 0; }
-.logo-strip li > span { min-width: 0; }
-.logo-strip li > span > * { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-@media (max-width: 720px) { .logo-strip { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 440px) { .logo-strip { grid-template-columns: 1fr; } }
-/* The Beredo wordmark, as the product draws it: two corner ticks in its steel
-   accent bracketing the name, set in the same condensed face this site uses. */
-.beredo-brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-weight: 600; font-size: 34px; line-height: 1; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text); }
-.beredo-tick { display: block; width: 11px; height: 11px; flex: none; }
-.beredo-tick-l { align-self: flex-start; border-top: 2px solid #5980a6; border-left: 2px solid #5980a6; }
-.beredo-tick-r { align-self: flex-end; border-bottom: 2px solid #5980a6; border-right: 2px solid #5980a6; }
-/* Fig. 02: a five-stage delivery chain with arrows between the stages,
-   drawn with the same grey blocks as Fig. 01. */
-.chain { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
-.chain > span { position: relative; background: color-mix(in srgb, var(--color-text) 6%, transparent); padding: 12px 4px; text-align: center; font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 13px; line-height: 16px; letter-spacing: 0.04em; text-transform: uppercase; }
-.chain > span + span::before { content: "→"; position: absolute; left: -8px; top: 50%; transform: translate(-50%, -50%); color: var(--color-accent-2-700); font-size: 12px; line-height: 1; }
-@media (max-width: 480px) {
-  .chain { gap: 12px; }
-  .chain > span { font-size: 11px; letter-spacing: 0.02em; padding: 10px 2px; }
-  .chain > span + span::before { left: -6px; font-size: 10px; }
-}
-.logo-strip img { width: 28px; height: 28px; display: block; flex: none; }
-.logo-strip b { font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 22px; line-height: 24px; letter-spacing: 0.02em; text-transform: uppercase; }
-.logo-strip small { display: block; font-size: 13px; line-height: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 60%, transparent); }
-</style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
@@ -151,6 +177,7 @@ a:hover { color: var(--color-accent); }
   <a href="#services">Services</a>
   <a href="#ai">AI capability</a>
   <a href="#method">Method</a>
+  <a href="#faq">FAQ</a>
   <a href="#about">About</a>
   <a href="#beredo">Beredo</a>
   <a href="#careers">Careers</a>
@@ -231,33 +258,36 @@ a:hover { color: var(--color-accent); }
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(24px,3vw,48px)">
       <div style="border-top:2px solid var(--color-divider);padding-top:20px">
 
-        <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:22px;line-height:24px;letter-spacing:0.02em;text-transform:uppercase;margin:0">Digital transformation</h2>
+        <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:22px;line-height:24px;letter-spacing:0.02em;text-transform:uppercase;margin:0"><a class="card-link" href="/digital-transformation/">Digital transformation</a></h2>
         <p style="font-size:15px;line-height:24px;margin:16px 0 0;color:color-mix(in srgb, var(--color-text) 80%, transparent)">Paper forms, shared inboxes and spreadsheets replaced with systems of record. We inventory the documents, agree what each one is actually for, and retire the ones nobody reads.</p>
         <ul style="margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;line-height:20px;color:color-mix(in srgb, var(--color-text) 72%, transparent)">
           <li>Process and document audit</li>
           <li>Systems selection and integration</li>
           <li>Migration off paper and PDFs</li>
         </ul>
+        <p style="margin:16px 0 0;font-size:14px;line-height:20px"><a href="/digital-transformation/">About digital transformation →</a></p>
       </div>
       <div style="border-top:2px solid var(--color-divider);padding-top:20px">
 
-        <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:22px;line-height:24px;letter-spacing:0.02em;text-transform:uppercase;margin:0">Process automation</h2>
+        <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:22px;line-height:24px;letter-spacing:0.02em;text-transform:uppercase;margin:0"><a class="card-link" href="/process-automation/">Process automation</a></h2>
         <p style="font-size:15px;line-height:24px;margin:16px 0 0;color:color-mix(in srgb, var(--color-text) 80%, transparent)">The repetitive middle of a workflow — intake, routing, approval chasing, re-keying — handed to software, with exceptions escalated to a named person rather than swallowed.</p>
         <ul style="margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;line-height:20px;color:color-mix(in srgb, var(--color-text) 72%, transparent)">
           <li>Workflow and approval routing</li>
           <li>Document intake and extraction</li>
           <li>Exception handling and alerting</li>
         </ul>
+        <p style="margin:16px 0 0;font-size:14px;line-height:20px"><a href="/process-automation/">About process automation →</a></p>
       </div>
       <div style="border-top:2px solid var(--color-divider);padding-top:20px">
 
-        <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:22px;line-height:24px;letter-spacing:0.02em;text-transform:uppercase;margin:0">Consulting &amp; training</h2>
+        <h2 style="font-family:var(--font-heading);font-weight:var(--font-heading-weight);font-size:22px;line-height:24px;letter-spacing:0.02em;text-transform:uppercase;margin:0"><a class="card-link" href="/consulting-training/">Consulting &amp; training</a></h2>
         <p style="font-size:15px;line-height:24px;margin:16px 0 0;color:color-mix(in srgb, var(--color-text) 80%, transparent)">Advice and hands-on training so the system keeps running after we leave. We write the runbook, train the operators, and hand over the source.</p>
         <ul style="margin:16px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:14px;line-height:20px;color:color-mix(in srgb, var(--color-text) 72%, transparent)">
           <li>Technical due diligence</li>
           <li>Operator and admin training</li>
           <li>Handover, runbooks and source</li>
         </ul>
+        <p style="margin:16px 0 0;font-size:14px;line-height:20px"><a href="/consulting-training/">About consulting &amp; training →</a></p>
       </div>
     </div>
   </section>
@@ -344,8 +374,61 @@ a:hover { color: var(--color-accent); }
     </div>
   </section>
 
+  <section id="faq" style="padding:0 0 80px">
+    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">05 · Questions</span>
+    <hr style="height:1px;border:0;margin:0 0 32px;background:var(--color-divider)" />
+    <div class="two-col">
+      <div>
+        <h2 class="h-section">Frequently asked</h2>
+        <p class="body">The questions we hear in the first conversation. If yours is not here, ask it through the contact form and we will answer it directly.</p>
+      </div>
+      <div class="faq">
+      <details>
+        <summary>How long does a process review take?</summary>
+        <p>A review is deliberately short. We sit with the people doing the work, document the process as it actually runs, and return a written scope. How long that takes depends on how many teams and documents are involved, so we agree the length and price of the review itself before it starts.</p>
+      </details>
+      <details>
+        <summary>How is pricing structured?</summary>
+        <p>The review is priced on its own. It ends with a written scope that carries a fixed price, the assumptions it rests on, and a list of what we would not build. You can take that scope to another firm. Ongoing support after handover is a separate agreement if you want one.</p>
+      </details>
+      <details>
+        <summary>What happens when the automation meets something it does not recognise?</summary>
+        <p>It stops and asks. Every model step runs behind a confidence threshold; anything below it queues for a named person with the context attached, and every outcome, human or machine, is written to an immutable log and can be rolled back in one step. Nothing is silently dropped.</p>
+      </details>
+      <details>
+        <summary>Does our data leave our network?</summary>
+        <p>Only if you decide it can. Where documents must stay on your premises or in your country, we run open models on your own hardware and integrate with the local regions of the platforms you already license. Beredo, our own product, is built so the assistant never reads what clients submit.</p>
+      </details>
+      <details>
+        <summary>Which AI platforms do you integrate with?</summary>
+        <p>The ones already licensed in your business where possible: Microsoft Copilot and Azure OpenAI, ChatGPT and the OpenAI API, Anthropic's Claude, and multi-model gateways such as OpenRouter. For offline work we run open models through Ollama. We have shipped with each of these.</p>
+      </details>
+      <details>
+        <summary>Do we have to replace our existing systems?</summary>
+        <p>Usually not. Digital transformation starts with an inventory of every document, form and spreadsheet in the process and a decision about what each one is for. We retire what nobody reads, keep the systems that are sound, and integrate rather than replace wherever we can.</p>
+      </details>
+      <details>
+        <summary>What do we receive at handover?</summary>
+        <p>Source code, configuration, a runbook for day-to-day operation and exception handling, and training for the operators and administrators who will run it. The system is yours to run without us. We would rather leave a trained team than a support dependency.</p>
+      </details>
+      <details>
+        <summary>Who do you work with?</summary>
+        <p>Small and midsize organisations: owner-led firms, operations teams and internal IT whose processes still run on paper, attachments and manual re-keying. We are a very small team by design and take fewer engagements than we could, so the people you meet in the review are the people who build.</p>
+      </details>
+      <details>
+        <summary>Where are you based, and what hours do you work?</summary>
+        <p>Toronto, Canada and Pune, India. The two offices give overlapping coverage across North American and Indian working hours, so a review held in Toronto in the afternoon can be built against in Pune the same evening. See the <a href="/toronto/">Toronto</a> and <a href="/pune/">Pune</a> pages.</p>
+      </details>
+      <details>
+        <summary>How do we get started?</summary>
+        <p>Describe the workflow that costs you the most time through the <a href="https://beredo.io/start/6f3ce085954fdb059ed47274797a8f5e78dbb2ca63724382291001de504575f4" target="_blank" rel="noopener">contact form</a>. We reply with what we would look at first and an honest view on whether a review is worth your money.</p>
+      </details>
+      </div>
+    </div>
+  </section>
+
   <section id="about" style="padding:0 0 80px">
-    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">05 · About</span>
+    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">06 · About</span>
     <hr style="height:1px;border:0;margin:0 0 32px;background:var(--color-divider)" />
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,64px);align-items:start">
       <div>
@@ -393,7 +476,7 @@ a:hover { color: var(--color-accent); }
 
 
   <section id="beredo" style="padding:0 0 80px">
-    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">06 · Product</span>
+    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">07 · Product</span>
     <hr style="height:1px;border:0;margin:0 0 32px;background:var(--color-divider)" />
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(24px,4vw,64px);align-items:start">
       <div>
@@ -451,7 +534,7 @@ a:hover { color: var(--color-accent); }
   </section>
 
   <section id="contact" style="padding:0 0 80px">
-    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">07 · Contact</span>
+    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">08 · Contact</span>
     <hr style="height:1px;border:0;margin:0 0 32px;background:var(--color-divider)" />
     <div style="padding-top:20px;border-top:2px solid var(--color-accent-2)">
 
@@ -484,7 +567,7 @@ a:hover { color: var(--color-accent); }
   </section>
 
   <section id="careers" style="padding:0 0 24px">
-    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">08 · Careers</span>
+    <span style="display:block;font-size:13px;line-height:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--color-accent-700);margin:0 0 12px">09 · Careers</span>
     <hr style="height:1px;border:0;margin:0 0 32px;background:var(--color-divider)" />
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,64px);align-items:start">
       <div>
@@ -498,6 +581,16 @@ a:hover { color: var(--color-accent); }
     </div>
   </section>
 
+  <div class="footer-links">
+    <a href="/digital-transformation/">Digital transformation</a>
+    <a href="/process-automation/">Process automation</a>
+    <a href="/consulting-training/">Consulting &amp; training</a>
+    <a href="/toronto/">Toronto</a>
+    <a href="/pune/">Pune</a>
+    <a href="#faq">FAQ</a>
+    <a href="#beredo">Beredo</a>
+    <a href="#careers">Careers</a>
+  </div>
   <footer style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;padding:48px 0;font-size:13px;line-height:24px;color:color-mix(in srgb, var(--color-text) 70%, transparent)">
     <span>© 2026 Paperdrop. Toronto · Pune.</span>
     <span><a href="mailto:hello@paperdrop.io">hello@paperdrop.io</a></span>
