@@ -67,6 +67,6 @@ Contributions are welcome! Feel free to open an issue or submit a pull request.
 ## Contact
 
 - **Email:** deepak@paperdrop.io
-- **Phone:** +1 437 449 6106
+- **Phone:** +91 7276 197 537
 
 *This project was built with an in-house LLM (Benefactor-v1.10).*

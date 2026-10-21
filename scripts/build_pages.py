@@ -77,7 +77,6 @@ FOOTER_LINKS = [
     ("/digital-transformation/", "Digital transformation"),
     ("/process-automation/", "Process automation"),
     ("/consulting-training/", "Consulting &amp; training"),
-    ("/toronto/", "Toronto"),
     ("/pune/", "Pune"),
     ("/#faq", "FAQ"),
     ("/#beredo", "Beredo"),
@@ -91,7 +90,7 @@ def footer():
     {links}
   </div>
   <footer class="footer">
-    <span>© 2026 Paperdrop. Toronto · Pune.</span>
+    <span>© 2026 Paperdrop. Pune.</span>
     <span><a href="mailto:hello@paperdrop.io">hello@paperdrop.io</a></span>
   </footer>
 
@@ -114,7 +113,6 @@ def contact_block(no):
       </div>
       <div style="display:grid;gap:0">
         <div class="spec-row"><span>Contact</span><a href="{CONTACT}" target="_blank" rel="noopener">Contact form on Beredo</a></div>
-        <div class="spec-row"><span>Toronto</span><a href="tel:+14374496106">+1 437 449 6106</a></div>
         <div class="spec-row"><span>Pune</span><a href="tel:+917276197537">+91 7276 197 537</a></div>
         <div class="spec-row"><span>Email</span><a href="mailto:hello@paperdrop.io">hello@paperdrop.io</a></div>
       </div>
@@ -147,7 +145,7 @@ SERVICES = {
   "digital-transformation": dict(
     name="Digital transformation",
     title="Digital transformation for paper-based businesses | Paperdrop",
-    desc="Paperdrop replaces paper forms, shared inboxes and spreadsheets with systems of record. Process and document audit, systems selection and integration, migration off paper and PDFs. Toronto and Pune.",
+    desc="Paperdrop replaces paper forms, shared inboxes and spreadsheets with systems of record. Process and document audit, systems selection and integration, migration off paper and PDFs. Based in Pune, India.",
     h1=("Off paper.", "Onto a system of record."),
     lede="Digital transformation is not a new app on top of the old process. It is deciding what each document is for, keeping the ones that matter, and giving them one home that the whole business can trust.",
     problem_h="The problem we are usually called about",
@@ -175,7 +173,7 @@ SERVICES = {
   "process-automation": dict(
     name="Process automation",
     title="Process automation with an audit trail | Paperdrop",
-    desc="Paperdrop automates the repetitive middle of a workflow: intake, routing, approval chasing and re-keying. Exceptions go to a named person, every step is logged. Toronto and Pune.",
+    desc="Paperdrop automates the repetitive middle of a workflow: intake, routing, approval chasing and re-keying. Exceptions go to a named person, every step is logged. Based in Pune, India.",
     h1=("The repetitive middle,", "handed to software."),
     lede="Between the moment a request arrives and the moment somebody acts on it sits a chain of intake, routing, chasing and re-keying that no one chose as a career. We automate that chain and leave a log on every step a machine takes.",
     problem_h="What the middle of a workflow costs",
@@ -298,7 +296,7 @@ def service_page(slug, s):
       <h2 class="h-section">{s["related_h"]}</h2>
       <div>
         <p class="body">{s["related"]}</p>
-        <p class="muted">Other services: {other_links}. Offices in <a href="/toronto/">Toronto</a> and <a href="/pune/">Pune</a>.</p>
+        <p class="muted">Other services: {other_links}. Based in <a href="/pune/">Pune</a>, India.</p>
       </div>
     </div>
   </section>
@@ -310,41 +308,18 @@ def service_page(slug, s):
 # --------------------------------------------------------------------------
 
 LOCATIONS = {
-  "toronto": dict(
-    city="Toronto", region="ON", region_name="Ontario", country="CA", country_name="Canada",
-    tel_display="+1 437 449 6106", tel="+1-437-449-6106", tel_href="tel:+14374496106",
-    tz="Eastern Time", tz_iana="America/Toronto",
-    title="Process automation and AI consultancy in Toronto | Paperdrop",
-    desc="Paperdrop is a software consultancy in Toronto for small and midsize businesses still running on paper, forms and manual re-keying. Digital transformation, process automation and auditable AI, with a delivery team in Pune.",
-    h1=("Toronto.", "Paper in, automation out."),
-    lede="Our Toronto office is where most engagements start: the process review, the scoping conversation, and the training sessions with the people who will run the system. Delivery is shared with our Pune team, so work continues across the day.",
-    who_h="Who we work with here",
-    who=[
-      "Owner-led firms and operations teams across the Greater Toronto Area whose processes still run on forms, email attachments and spreadsheets: brokerages and advisory firms collecting client documents, professional services practices onboarding clients, and businesses with an approvals chain that lives in somebody's inbox.",
-      "Canadian data residency comes up in nearly every conversation. Where documents must not leave the country, or the network, we run open models on your own hardware and integrate with the Canadian regions of the platforms you already license.",
-      "We meet in person for the review and for training. Everything else runs remotely, with a named person in Toronto responsible for the engagement from first meeting to handover.",
-    ],
-    rows=[
-      ("Phone", '<a href="tel:+14374496106">+1 437 449 6106</a>'),
-      ("Email", '<a href="mailto:hello@paperdrop.io">hello@paperdrop.io</a>'),
-      ("Hours", "Monday to Friday, Eastern Time. Delivery continues in Pune outside these hours."),
-      ("Meetings", "In person across the Greater Toronto Area, or by video"),
-      ("Serving", "Toronto, Ontario and clients across Canada and the United States"),
-    ],
-    other=("pune", "Pune"),
-  ),
   "pune": dict(
     city="Pune", region="MH", region_name="Maharashtra", country="IN", country_name="India",
     tel_display="+91 7276 197 537", tel="+91-7276197537", tel_href="tel:+917276197537",
     tz="India Standard Time", tz_iana="Asia/Kolkata",
     title="Process automation and AI consultancy in Pune | Paperdrop",
-    desc="Paperdrop's Pune office delivers digital transformation, process automation and auditable AI for small and midsize businesses in India and for our North American clients. Overlapping hours with Toronto.",
+    desc="Paperdrop's Pune office delivers digital transformation, process automation and auditable AI for small and midsize businesses in India and for our international clients, with working hours that overlap Europe and North America.",
     h1=("Pune.", "Built here, run anywhere."),
     lede="Pune is where much of our building happens, and where we work with Indian businesses directly. The same small team, the same review-then-build method, and hours that overlap with both India and North America.",
     who_h="Who we work with here",
     who=[
       "Small and midsize businesses in Pune and across Maharashtra whose approvals, intake and record-keeping still move as paper, scans and WhatsApp forwards: manufacturers and their purchasing desks, professional practices, educational institutions and growing service firms.",
-      "For our Toronto clients the Pune team is the reason work progresses overnight in North America. A review conducted in Toronto in the afternoon is being built against in Pune the same evening, with a shared log so nothing is lost in the hand-off.",
+      "For our clients outside India the Pune team is the reason work progresses overnight. A review held in the afternoon in your time zone is being built against in Pune by the next morning, with a shared log so nothing is lost in the hand-off.",
       "Where documents must stay in India, or on your own premises, we run open models locally and integrate with the Indian regions of the cloud platforms you already use.",
     ],
     rows=[
@@ -354,7 +329,6 @@ LOCATIONS = {
       ("Meetings", "In person in Pune, or by video"),
       ("Serving", "Pune, Maharashtra, clients across India, and delivery for North American engagements"),
     ],
-    other=("toronto", "Toronto"),
   ),
 }
 
@@ -376,7 +350,9 @@ def location_page(slug, L):
       "areaServed": {"@type": "AdministrativeArea", "name": f'{L["city"]}, {L["region_name"]}'},
       "knowsAbout": ["Digital transformation", "Business process automation", "Document automation", "AI integration"],
     }
-    other_slug, other_name = L["other"]
+    other = L.get("other")
+    other_slug, other_name = other if other else (None, None)
+    elsewhere = f'Also from our <a href="/{other_slug}/">{other_name}</a> office. ' if other else ''
     h1a, h1b = L["h1"]
     body = f'''
   <section class="hero">
@@ -395,7 +371,7 @@ def location_page(slug, L):
     <div class="two-col">
       <div>
         <h2 class="h-section">Working with us from {L["city"]}</h2>
-        <p class="body">One team across two offices. Whichever one you start with, the people you meet in the review are the people who build the thing, and the same log follows the work between {L["city"]} and {other_name}.</p>
+        <p class="body">The people you meet in the review are the people who build the thing, and the same log follows the work from first meeting to handover.</p>
       </div>
       <div style="display:grid;gap:0">
 {rows_html(L["rows"])}
@@ -431,7 +407,7 @@ def location_page(slug, L):
         <p class="muted">Technical due diligence, operator training, runbooks and handover.</p>
       </div>
     </div>
-    <p class="muted" style="margin-top:32px">Also from our <a href="/{other_slug}/">{other_name}</a> office. Read <a href="/#method">how we work</a> and the <a href="/#faq">frequently asked questions</a>.</p>
+    <p class="muted" style="margin-top:32px">{elsewhere}Read <a href="/#method">how we work</a> and the <a href="/#faq">frequently asked questions</a>.</p>
   </section>
 {contact_block("04")}'''
     return head(L["title"], L["desc"], path, ld, og_title=f'Paperdrop {L["city"]}') + NAV + body + footer()
@@ -461,7 +437,6 @@ def not_found_page():
       <div class="tile tile-lead"><h3 class="h-card"><a class="card-link" href="/digital-transformation/">Digital transformation</a></h3></div>
       <div class="tile"><h3 class="h-card"><a class="card-link" href="/process-automation/">Process automation</a></h3></div>
       <div class="tile"><h3 class="h-card"><a class="card-link" href="/consulting-training/">Consulting &amp; training</a></h3></div>
-      <div class="tile"><h3 class="h-card"><a class="card-link" href="/toronto/">Toronto</a></h3></div>
       <div class="tile"><h3 class="h-card"><a class="card-link" href="/pune/">Pune</a></h3></div>
       <div class="tile"><h3 class="h-card"><a class="card-link" href="/#beredo">Beredo</a></h3></div>
     </div>
