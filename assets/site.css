@@ -47,12 +47,12 @@ a:hover { color: var(--color-accent); }
 .logo-strip li > span > * { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 @media (max-width: 720px) { .logo-strip { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 440px) { .logo-strip { grid-template-columns: 1fr; } }
-/* The Beredo wordmark, as the product draws it: two corner ticks in its steel
-   accent bracketing the name, set in the same condensed face this site uses. */
+/* The Beredo logo: its steel mark (assets/logos/beredo.svg) beside the name,
+   set in the same condensed face the product uses. */
 .beredo-brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-heading); font-weight: 600; font-size: 34px; line-height: 1; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text); }
-.beredo-tick { display: block; width: 11px; height: 11px; flex: none; }
-.beredo-tick-l { align-self: flex-start; border-top: 2px solid #5980a6; border-left: 2px solid #5980a6; }
-.beredo-tick-r { align-self: flex-end; border-bottom: 2px solid #5980a6; border-right: 2px solid #5980a6; }
+.beredo-brand img { width: 40px; height: 40px; display: block; flex: none; }
+.nav-product { display: inline-flex; align-items: center; gap: 6px; }
+.nav-product img { width: 18px; height: 18px; display: block; flex: none; }
 /* Fig. 02: a five-stage delivery chain with arrows between the stages,
    drawn with the same grey blocks as Fig. 01. */
 .chain { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
